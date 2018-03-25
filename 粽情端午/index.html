@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>粽情端午</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <div class="main">
+        <div class="container" id="container">
+            <!--粽子-->
+            <div class="c-zongzi" id="c-zongzi"></div>
+            <!--绳子-->
+            <div class="c-rope-1" id="c-rope-1"></div>
+
+            <!--粽子肉-->
+            <div class="c-zongzi-fruit" id="c-zongzi-fruit"></div>
+            <!--叶子-->
+            <div class="c-leftLeaf" id="c-leftLeaf"></div>
+            <div class="c-rightLeaf" id="c-rightLeaf"></div>
+            <div class="c-bottomLeaf" id="c-bottomLeaf"></div>
+
+            <!--文字-->
+            <div class="c-text-1" id="c-text-1"></div>
+            <div class="c-text-2" id="c-text-2"></div>
+        </div>
+
+        <div class="wish" id="wish">
+            <div class="caption" id="caption"></div>
+            <div class="msg" id="msg"> 棕子好甜怡人醉,共诉人情酒一杯,道上一句祝福语,端午生色星光辉,道路平稳无妨碍,心静安宁乐相随。祝您和家人端午节快乐!</div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+
+    /*获取 dom 对象*/
+    var g = function(id){
+        return document.getElementById(id);
+    };
+
+    /*时间轴对象构造器*/
+    var Timeline = function(){
+        this.order = [];             //  动画序列
+        this.add = function(timeout, func, log){
+            this.order.push({
+                timeout:timeout,
+                func:func,
+                log:log,
+            });
+        };
+        //  参数 ff 支持快进
+        this.start = function( ff ){
+            for (s in this.order){
+                (function(me){
+
+                    var fn = me.func;
+                    var timeout = me.timeout;
+                    var log = me.log;
+                    timeout = Math.max( timeout - (ff || 0), 0);
+
+                    setTimeout(fn,timeout);
+                    setTimeout(function(){
+                        console.log("time==>",timeout,"log==>",log);
+                    },timeout);
+                })(this.order[s])
+            }
+        };
+    };
+
+    //  初始的场景
+    var s1 = new Timeline();
+    //  粽子展开的场景
+    var s2 = new Timeline();
+    //  粽子旋转的场景
+    var s3 = new Timeline();
+
+    s1.add(1,function(){
+        g("container").className = "container animate";
+        g("c-rope-1").onclick = function (){
+            s2.start();
+            g("c-rope-1").onclick = function(){};
+        };
+    });
+
+    //  定义粽子展开的动画
+    s2.add(1,function(){
+        g("container").className = "container";
+        g("caption").className = "caption text-in";
+        g("msg").className = "msg text-in";
+    });
+    s2.add(100,function(){
+        g("c-rope-1").className = "c-rope-2";
+    });
+    s2.add(500,function(){
+        g("c-rope-1").className = "c-rope-3";
+    });
+    s2.add(1000,function(){
+        g("c-rope-1").className = "c-rope-4";
+    });
+    s2.add(1500,function(){
+        g("c-rope-1").className = "c-rope-0";
+    });
+
+    s2.add(2000,function(){
+        g("c-zongzi").className = "c-zongzi c-zongzi-out";
+        g("c-zongzi-fruit").className = "c-zongzi-fruit c-zongzi-fruit-in";
+        g("c-leftLeaf").className = "c-leftLeaf c-leftLeaf-in";
+        g("c-rightLeaf").className = "c-rightLeaf c-rightLeaf-in";
+
+        g("c-text-1").className = "c-text-1 c-text-in";
+        g("c-text-2").className = "c-text-2 c-text-mirror-0";
+    });
+    s2.add(3000,function(){
+        g("c-leftLeaf").className = "c-leftLeaf c-leftLeaf-in c-leftLeaf-out";
+        g("c-rightLeaf").className = "c-rightLeaf c-rightLeaf-in c-rightLeaf-out";
+        g("c-bottomLeaf").className = "c-bottomLeaf c-bottomLeaf-in";
+        s3.start();
+    });
+
+    //  粽子肉托盘旋转动画定义
+    s3.add(1000,function(){
+        g("c-zongzi-fruit").className = "c-zongzi-fruit c-zongzi-fruit-in c-zongzi-fruit-View-1"
+    });
+    s3.add(1200,function(){
+        g("c-zongzi-fruit").className = "c-zongzi-fruit c-zongzi-fruit-in c-zongzi-fruit-View-2";
+        g("c-text-1").className = "c-text-1 c-text-in c-text-view-2";
+        g("c-text-2").className = "c-text-2 c-text-in c-text-mirror-2";
+    });
+    s3.add(1400,function(){
+        g("c-zongzi-fruit").className = "c-zongzi-fruit c-zongzi-fruit-in c-zongzi-fruit-View-3";
+        g("c-text-1").className = "c-text-1 c-text-in c-text-view-3";
+        g("c-text-2").className = "c-text-2 c-text-in c-text-mirror-3";
+    });
+    s3.add(1600,function(){
+        g("c-zongzi-fruit").className = "c-zongzi-fruit c-zongzi-fruit-in c-zongzi-fruit-View-4";
+        g("c-text-1").className = "c-text-1 c-text-in c-text-view-4";
+        g("c-text-2").className = "c-text-2 c-text-in c-text-mirror-4";
+    });
+    s3.add(1800,function(){
+        g("c-zongzi-fruit").className = "c-zongzi-fruit c-zongzi-fruit-in c-zongzi-fruit-View-0";
+        g("c-text-1").className = "c-text-1 c-text-in c-text-mirror-0";
+        g("c-text-2").className = "c-text-2 c-text-in c-text-view-0";
+    });
+
+    s3.add(3000,function(){
+        g("c-zongzi-fruit").className = "c-zongzi-fruit c-zongzi-fruit-in c-zongzi-fruit-View-4";
+        g("c-text-1").className = "c-text-1 c-text-in c-text-view-4";
+        g("c-text-2").className = "c-text-2 c-text-in c-text-mirror-4";
+    });
+    s3.add(3200,function(){
+        g("c-zongzi-fruit").className = "c-zongzi-fruit c-zongzi-fruit-in c-zongzi-fruit-View-3";
+        g("c-text-1").className = "c-text-1 c-text-in c-text-view-3";
+        g("c-text-2").className = "c-text-2 c-text-in c-text-mirror-3";
+    });
+    s3.add(3400,function(){
+        g("c-zongzi-fruit").className = "c-zongzi-fruit c-zongzi-fruit-in c-zongzi-fruit-View-2";
+        g("c-text-1").className = "c-text-1 c-text-in c-text-view-2";
+        g("c-text-2").className = "c-text-2 c-text-in c-text-mirror-2";
+    });
+    s3.add(3600,function(){
+        g("c-zongzi-fruit").className = "c-zongzi-fruit c-zongzi-fruit-in c-zongzi-fruit-View-1";
+        g("c-text-1").className = "c-text-1 c-text-view-0";
+        g("c-text-2").className = "c-text-2 c-text-in c-text-mirror-0";
+    });
+
+    s3.add(5000,function(){
+        s3.start();
+    });
+
+    s2.start(1500);
+
+
+</script>
+</html>

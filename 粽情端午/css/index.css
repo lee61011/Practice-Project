@@ -1,0 +1,333 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #000;
+  min-width: 1200px;
+  min-height: 600px;
+  font-family: "微软雅黑";
+}
+.main {
+  width: 1200px;
+  height: 600px;
+  background: url("../images/bg.jpg");
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -600px;
+  margin-top: -300px;
+  overflow: hidden;
+  /*粽子盒子  所有的内部元件都在这里*/
+  /*祝福语*/
+}
+.main .container {
+  width: 312px;
+  height: 305px;
+  position: absolute;
+  left: 700px;
+  top: 184px;
+  /*粽子*/
+  /*绳子*/
+  /*粽子肉*/
+  /*文字的视角*/
+  /*.c-text-View-1{
+      transform: scale(.8) rotateY(30deg) translate(-50px, 0) rotate(8deg);
+    }
+    .c-text-View-2{
+      transform: scale(.7) rotateY(70deg) translate(283px, -15) rotate(-8deg);
+    }
+    .c-text-View-3{
+      transform: scale(.75) rotateY(49deg) translate(-94px, 0) rotate(15deg);
+    }
+    .c-text-View-4{
+      transform: scale(.75) rotateY(47deg) translate(118px, 0) rotate(-15deg);
+    }
+    .c-text-View-5{
+      transform: scale(.8) rotateY(30deg) translate(-196px, 0) rotate(24deg);
+    }
+    .c-text-View-6{
+      transform: scale(.8) rotateY(30deg) translate(58px, 0) rotate(-5deg);
+    }
+    .c-text-View-7{
+      transform: scale(.8) rotateY(30deg) translate(-50px, 0) rotate(8deg);
+    }
+    .c-text-View-0{
+      z-index: 0;
+      display: none;
+    }*/
+  /*左侧叶子*/
+  /*右侧叶子*/
+  /*底部叶子*/
+  /*文字*/
+}
+.main .container .c-zongzi {
+  width: 312px;
+  height: 305px;
+  background: url("../images/zz.png");
+  transition: all 1s;
+}
+.main .container .c-zongzi-out {
+  opacity: 0;
+  transform: scale(0.5);
+}
+.main .container .c-rope-1 {
+  width: 218px;
+  height: 180px;
+  background: url("../images/line_1.png");
+  position: absolute;
+  left: 10px;
+  top: 120px;
+  z-index: 999;
+  cursor: pointer;
+}
+.main .container .c-rope-2 {
+  width: 219px;
+  height: 159px;
+  background: url("../images/line_2.png");
+  position: absolute;
+  left: 10px;
+  top: 158px;
+}
+.main .container .c-rope-3 {
+  width: 264px;
+  height: 117px;
+  background: url("../images/line_3.png");
+  position: absolute;
+  left: 10px;
+  top: 220px;
+}
+.main .container .c-rope-4 {
+  width: 288px;
+  height: 56px;
+  background: url("../images/line_4.png");
+  position: absolute;
+  left: 10px;
+  top: 290px;
+}
+.main .container .c-rope-0 {
+  display: none;
+}
+.main .container .c-zongzi-fruit {
+  width: 282px;
+  height: 206px;
+  background: url("../images/zzr_1.png");
+  background-size: 282px 206px;
+  position: absolute;
+  left: 50px;
+  top: 54px;
+  z-index: 2;
+  opacity: 0;
+  transition: all 1s;
+}
+.main .container .c-zongzi-fruit-in {
+  opacity: 1;
+}
+.main .container .c-zongzi-fruit-View-1 {
+  transition: all 0s;
+  background-image: url(../images/zzr_1.png);
+}
+.main .container .c-zongzi-fruit-View-2 {
+  transition: all 0s;
+  background-image: url(../images/zzr_2.png);
+}
+.main .container .c-zongzi-fruit-View-3 {
+  transition: all 0s;
+  background-image: url(../images/zzr_3.png);
+}
+.main .container .c-zongzi-fruit-View-4 {
+  transition: all 0s;
+  background-image: url(../images/zzr_4.png);
+}
+.main .container .c-zongzi-fruit-View-0 {
+  transition: all 0s;
+  background-image: url(../images/zzr_1.png);
+  transform: rotateY(180deg);
+}
+.main .container .c-text-view-0 {
+  transition: all 0s;
+  transform: scale(0.8);
+}
+.main .container .c-text-mirror-0 {
+  transition: all 0s;
+  display: none;
+}
+.main .container .c-text-view-2 {
+  transition: all 0s;
+  transform: scale(0.8) rotateY(30deg) translate(-50px, 0) rotate(8deg);
+}
+.main .container .c-text-mirror-2 {
+  transition: all 0s;
+  transform: scale(0.7) rotateY(70deg) translate(283px, -15px) rotate(-8deg);
+}
+.main .container .c-text-view-3 {
+  transition: all 0s;
+  transform: scale(0.75) rotateY(49deg) translate(-94px, 0) rotate(15deg);
+}
+.main .container .c-text-mirror-3 {
+  transition: all 0s;
+  transform: scale(0.75) rotateY(49deg) translate(118px, 0) rotate(-15deg);
+}
+.main .container .c-text-view-4 {
+  transition: all 0s;
+  transform: scale(0.6) rotateY(50deg) translate(-196px, 10px) rotate(24deg);
+}
+.main .container .c-text-mirror-4 {
+  transition: all 0s;
+  transform: scale(0.8) rotateY(30deg) translate(58px, 10px) rotate(-5deg);
+}
+.main .container .c-leftLeaf {
+  width: 114px;
+  height: 266px;
+  background: url("../images/leaf_left.png");
+  position: absolute;
+  left: 20px;
+  top: -50px;
+  z-index: 1;
+  opacity: 0;
+  transform-origin: left bottom;
+  transition: all 1s;
+}
+.main .container .c-leftLeaf-in {
+  opacity: 1;
+  transform: rotate(-5deg);
+}
+.main .container .c-leftLeaf-out {
+  opacity: 0;
+  transform: rotate(-15deg);
+}
+.main .container .c-rightLeaf {
+  width: 318px;
+  height: 338px;
+  background: url("../images/leaf_right.png");
+  position: absolute;
+  left: 90px;
+  top: -80px;
+  z-index: 10;
+  opacity: 0;
+  transform-origin: left bottom;
+  transition: all 1s;
+  transform: scale(0.8);
+}
+.main .container .c-rightLeaf-in {
+  opacity: 1;
+  transform: rotate(5deg) scale(0.8);
+}
+.main .container .c-rightLeaf-out {
+  opacity: 0;
+  transform: rotate(15deg) scale(0.8);
+}
+.main .container .c-bottomLeaf {
+  width: 618px;
+  height: 468px;
+  background: url("../images/leaf_expand.png");
+  position: absolute;
+  left: -150px;
+  top: -60px;
+  opacity: 0;
+  display: none;
+  transition: all 1s;
+}
+.main .container .c-bottomLeaf-in {
+  opacity: 1;
+}
+.main .container .c-text-1 {
+  width: 180px;
+  height: 100px;
+  background: url("../images/t_jixiang.png");
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -70px;
+  margin-top: -50px;
+  z-index: 11;
+  transform-origin: center center;
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 1s;
+}
+.main .container .c-text-2 {
+  width: 180px;
+  height: 100px;
+  background: url("../images/t_ruyi.png");
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -70px;
+  margin-top: -50px;
+  z-index: 11;
+  transform-origin: center center;
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 1s;
+}
+.main .container .c-text-in {
+  opacity: 1;
+}
+.main .wish {
+  position: absolute;
+  width: 400px;
+  height: 370px;
+  left: 180px;
+  top: 140px;
+  /*.wish-in{
+      opacity: 1;
+      margin-left: 0px;
+    }*/
+}
+.main .wish .caption {
+  width: 400px;
+  height: 240px;
+  background: url("../images/caption.png") no-repeat;
+  margin-left: 40px;
+  opacity: 0;
+  transition: all 1s;
+}
+.main .wish .text-in.caption {
+  opacity: 1;
+  margin-left: 0px;
+}
+.main .wish .msg {
+  width: 400px;
+  margin-top: 10px;
+  margin-left: 40px;
+  font-size: 16px;
+  line-height: 24px;
+  color: #888;
+  text-indent: 2em;
+  opacity: 0;
+  transition: all 1s .5s;
+}
+.main .wish .text-in.msg {
+  opacity: 1;
+  margin-left: 0px;
+}
+/*定义动画样式*/
+@keyframes rock {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(3deg);
+  }
+  20% {
+    transform: rotate(-3deg);
+  }
+  30% {
+    transform: rotate(2deg);
+  }
+  40% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(1deg);
+  }
+  60% {
+    transform: rotate(-1deg);
+  }
+}
+/*使用动画*/
+.container.animate {
+  animation: rock 2s infinite;
+}
+/*# sourceMappingURL=index.css.map */
