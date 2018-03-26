@@ -30,6 +30,10 @@ body {
   /*粽子*/
   /*绳子*/
   /*粽子肉*/
+  /*左侧叶子*/
+  /*右侧叶子*/
+  /*底部叶子*/
+  /*文字*/
   /*文字的视角*/
   /*.c-text-View-1{
       transform: scale(.8) rotateY(30deg) translate(-50px, 0) rotate(8deg);
@@ -56,10 +60,6 @@ body {
       z-index: 0;
       display: none;
     }*/
-  /*左侧叶子*/
-  /*右侧叶子*/
-  /*底部叶子*/
-  /*文字*/
 }
 .main .container .c-zongzi {
   width: 312px;
@@ -109,19 +109,22 @@ body {
   display: none;
 }
 .main .container .c-zongzi-fruit {
-  width: 282px;
+  width: 288px;
   height: 206px;
   background: url("../images/zzr_1.png");
-  background-size: 282px 206px;
+  background-size: 288px 206px;
   position: absolute;
   left: 50px;
   top: 54px;
   z-index: 2;
+  transform: scale(0.8);
+  transform-origin: top center;
   opacity: 0;
   transition: all 1s;
 }
 .main .container .c-zongzi-fruit-in {
   opacity: 1;
+  transform: scale(1);
 }
 .main .container .c-zongzi-fruit-View-1 {
   transition: all 0s;
@@ -143,38 +146,6 @@ body {
   transition: all 0s;
   background-image: url(../images/zzr_1.png);
   transform: rotateY(180deg);
-}
-.main .container .c-text-view-0 {
-  transition: all 0s;
-  transform: scale(0.8);
-}
-.main .container .c-text-mirror-0 {
-  transition: all 0s;
-  display: none;
-}
-.main .container .c-text-view-2 {
-  transition: all 0s;
-  transform: scale(0.8) rotateY(30deg) translate(-50px, 0) rotate(8deg);
-}
-.main .container .c-text-mirror-2 {
-  transition: all 0s;
-  transform: scale(0.7) rotateY(70deg) translate(283px, -15px) rotate(-8deg);
-}
-.main .container .c-text-view-3 {
-  transition: all 0s;
-  transform: scale(0.75) rotateY(49deg) translate(-94px, 0) rotate(15deg);
-}
-.main .container .c-text-mirror-3 {
-  transition: all 0s;
-  transform: scale(0.75) rotateY(49deg) translate(118px, 0) rotate(-15deg);
-}
-.main .container .c-text-view-4 {
-  transition: all 0s;
-  transform: scale(0.6) rotateY(50deg) translate(-196px, 10px) rotate(24deg);
-}
-.main .container .c-text-mirror-4 {
-  transition: all 0s;
-  transform: scale(0.8) rotateY(30deg) translate(58px, 10px) rotate(-5deg);
 }
 .main .container .c-leftLeaf {
   width: 114px;
@@ -225,7 +196,6 @@ body {
   left: -150px;
   top: -60px;
   opacity: 0;
-  display: none;
   transition: all 1s;
 }
 .main .container .c-bottomLeaf-in {
@@ -264,16 +234,44 @@ body {
 .main .container .c-text-in {
   opacity: 1;
 }
+.main .container .c-text-view-0 {
+  transition: all 0s;
+  transform: scale(0.8);
+}
+.main .container .c-text-mirror-0 {
+  transition: all 0s;
+  display: none;
+}
+.main .container .c-text-view-2 {
+  transition: all 0s;
+  transform: scale(0.8) rotateY(30deg) translate(-50px, 0) rotate(8deg);
+}
+.main .container .c-text-mirror-2 {
+  transition: all 0s;
+  transform: scale(0.7) rotateY(70deg) translate(283px, -15px) rotate(-8deg);
+}
+.main .container .c-text-view-3 {
+  transition: all 0s;
+  transform: scale(0.75) rotateY(49deg) translate(-94px, 0) rotate(15deg);
+}
+.main .container .c-text-mirror-3 {
+  transition: all 0s;
+  transform: scale(0.75) rotateY(49deg) translate(118px, 0) rotate(-15deg);
+}
+.main .container .c-text-view-4 {
+  transition: all 0s;
+  transform: scale(0.6) rotateY(50deg) translate(-196px, 10px) rotate(24deg);
+}
+.main .container .c-text-mirror-4 {
+  transition: all 0s;
+  transform: scale(0.8) rotateY(30deg) translate(58px, 10px) rotate(-5deg);
+}
 .main .wish {
   position: absolute;
   width: 400px;
   height: 370px;
   left: 180px;
   top: 140px;
-  /*.wish-in{
-      opacity: 1;
-      margin-left: 0px;
-    }*/
 }
 .main .wish .caption {
   width: 400px;
@@ -324,6 +322,12 @@ body {
   }
   60% {
     transform: rotate(-1deg);
+  }
+  70% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }
 /*使用动画*/

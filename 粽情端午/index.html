@@ -167,8 +167,21 @@
         s3.start();
     });
 
-    s2.start(1500);
+    // s2.start();
 
+    //  图片加载器
+    var imgs = ['images/zzr_2.png','images/zzr_3.png','images/zzr_4.png'];
+    var imgs_onload = function(){
+        imgs.pop();
+        if( imgs.length == 0 ) {
+            s1.start();
+        }
+    };
+    for ( s in imgs ){
+        var img = new Image;
+        img.onload = imgs_onload;
+        img.src = imgs[s];
+    }
 
 </script>
 </html>

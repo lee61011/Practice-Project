@@ -81,19 +81,22 @@ body{
 
     /*粽子肉*/
     .c-zongzi-fruit{
-      width: 282px;     // 288
+      width: 288px;
       height: 206px;
       background: url("../images/zzr_1.png");
-      background-size: 282px 206px;
+      background-size: 288px 206px;
       position: absolute;
       left: 50px;
       top: 54px;
       z-index: 2;
+      transform: scale(.8);
+      transform-origin: top center;
       opacity: 0;
       transition: all 1s;
     }
     .c-zongzi-fruit-in{         //  粽子肉淡入
       opacity: 1;
+      transform: scale(1);
     }
 
     .c-zongzi-fruit-View-1{
@@ -116,6 +119,98 @@ body{
       transition: all 0s;
       background-image: url(../images/zzr_1.png);
       transform: rotateY(180deg);
+    }
+
+    /*左侧叶子*/
+    .c-leftLeaf{
+      width: 114px;
+      height: 266px;
+      background: url("../images/leaf_left.png");
+      position: absolute;
+      left: 20px;
+      top: -50px;
+      z-index: 1;
+      opacity: 0;
+      transform-origin: left bottom;
+      transition: all 1s;
+    }
+    .c-leftLeaf-in{
+      opacity: 1;
+      transform: rotate(-5deg);
+    }
+    .c-leftLeaf-out{
+      opacity: 0;
+      transform: rotate(-15deg);
+    }
+    /*右侧叶子*/
+    .c-rightLeaf{
+      width: 318px;
+      height: 338px;
+      background: url("../images/leaf_right.png");
+      position: absolute;
+      left: 90px;
+      top: -80px;
+      z-index: 10;
+      opacity: 0;
+      transform-origin: left bottom;
+      transition: all 1s;
+      transform: scale(.8);
+    }
+    .c-rightLeaf-in{
+      opacity: 1;
+      transform: rotate(5deg) scale(.8);
+    }
+    .c-rightLeaf-out{
+      opacity: 0;
+      transform:rotate(15deg) scale(.8);
+    }
+    /*底部叶子*/
+    .c-bottomLeaf{
+      width: 618px;
+      height: 468px;
+      background: url("../images/leaf_expand.png");
+      position: absolute;
+      left: -150px;
+      top: -60px;
+      opacity: 0;
+      transition: all 1s;
+    }
+    .c-bottomLeaf-in{
+      opacity: 1;
+    }
+    /*文字*/
+    .c-text-1{
+      width: 180px;
+      height: 100px;
+      background: url("../images/t_jixiang.png");
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -70px;
+      margin-top: -50px;
+      z-index: 11;
+      transform-origin: center center;
+      transform: scale(.8);       //  控制缩放.8倍
+      opacity: 0;
+      transition: all 1s;
+    }
+    .c-text-2{
+      width: 180px;
+      height: 100px;
+      background: url("../images/t_ruyi.png");
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -70px;
+      margin-top: -50px;
+      z-index: 11;
+      transform-origin: center center;
+      transform: scale(.8);
+      opacity: 0;
+      transition: all 1s;
+    }
+    .c-text-in{
+      opacity: 1;
     }
 
     /*文字的视角*/
@@ -176,99 +271,6 @@ body{
       transition: all 0s;
       transform: scale(.8) rotateY(30deg) translate(58px,10px) rotate(-5deg);
     }
-
-    /*左侧叶子*/
-    .c-leftLeaf{
-      width: 114px;
-      height: 266px;
-      background: url("../images/leaf_left.png");
-      position: absolute;
-      left: 20px;
-      top: -50px;
-      z-index: 1;
-      opacity: 0;
-      transform-origin: left bottom;
-      transition: all 1s;
-    }
-    .c-leftLeaf-in{
-      opacity: 1;
-      transform: rotate(-5deg);
-    }
-    .c-leftLeaf-out{
-      opacity: 0;
-      transform: rotate(-15deg);
-    }
-    /*右侧叶子*/
-    .c-rightLeaf{
-      width: 318px;
-      height: 338px;
-      background: url("../images/leaf_right.png");
-      position: absolute;
-      left: 90px;
-      top: -80px;
-      z-index: 10;
-      opacity: 0;
-      transform-origin: left bottom;
-      transition: all 1s;
-      transform: scale(.8);
-    }
-    .c-rightLeaf-in{
-      opacity: 1;
-      transform: rotate(5deg) scale(.8);
-    }
-    .c-rightLeaf-out{
-      opacity: 0;
-      transform:rotate(15deg) scale(.8);
-    }
-    /*底部叶子*/
-    .c-bottomLeaf{
-      width: 618px;
-      height: 468px;
-      background: url("../images/leaf_expand.png");
-      position: absolute;
-      left: -150px;
-      top: -60px;
-      opacity: 0;
-      display: none;
-      transition: all 1s;
-    }
-    .c-bottomLeaf-in{
-      opacity: 1;
-    }
-    /*文字*/
-    .c-text-1{
-      width: 180px;
-      height: 100px;
-      background: url("../images/t_jixiang.png");
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      margin-left: -70px;
-      margin-top: -50px;
-      z-index: 11;
-      transform-origin: center center;
-      transform: scale(.8);       //  控制缩放.8倍
-      opacity: 0;
-      transition: all 1s;
-    }
-    .c-text-2{
-      width: 180px;
-      height: 100px;
-      background: url("../images/t_ruyi.png");
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      margin-left: -70px;
-      margin-top: -50px;
-      z-index: 11;
-      transform-origin: center center;
-      transform: scale(.8);
-      opacity: 0;
-      transition: all 1s;
-    }
-    .c-text-in{
-      opacity: 1;
-    }
   }
 
   /*祝福语*/
@@ -306,10 +308,6 @@ body{
       opacity: 1;
       margin-left: 0px;
     }
-    /*.wish-in{
-      opacity: 1;
-      margin-left: 0px;
-    }*/
   }
 }
 
@@ -322,8 +320,8 @@ body{
   40%{transform: rotate(-2deg);}
   50%{transform: rotate(1deg);}
   60%{transform: rotate(-1deg);}
-  70%{}
-  100%{}
+  70%{transform: rotate(0deg);}
+  100%{transform: rotate(0deg);}
 }         //  初始状态粽子抖动动画
 
 /*使用动画*/
