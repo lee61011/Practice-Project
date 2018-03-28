@@ -2,13 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
     <title>新春贺卡</title>
     <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
-<div id="music">
+<div class="music">
     <img src="./images/music_pointer.png" alt="">
-    <img class="play" src="./images/music_disc.png" alt="">
+    <img id="music" class="play" src="./images/music_disc.png" alt="">
 </div>
 
 <div class="page" id="page1">
@@ -30,5 +33,57 @@
     <div class="p3_first"></div>
     <div class="p3_blessing"></div>
 </div>
+
+<audio autoplay="true">
+    <source src="./music/bgm.mp3">
+</audio>
 </body>
+<script>
+    var music = document.getElementById("music");
+    var audio = document.getElementsByTagName("audio")[0];
+    var page1 = document.getElementById("page1");
+    var page2 = document.getElementById("page2");
+    var page3 = document.getElementById("page3");       
+
+    //  当音乐播放完停止时候,自动停止光盘旋转效果
+    audio.addEventListener("ended",function(event){
+        //  music.setAttribute("class","");
+        music.style.animationPlayState = "paused";
+    },false);
+
+    //  点击音乐图标,控制音乐播放效果
+    /*music.onclick = function(){
+        if(audio.paused){
+            audio.play();
+            // this.setAttribute("class","play");
+            这个方法用来控制动画的暂停与播放,running表示播放,paused表示暂停
+            * 此方法有兼容性问题 (安卓平台与iPhone平台不兼容)  所以开发中不常用
+            this.style.animationPlayState = "running";
+        } else {
+            audio.pause();
+            // this.setAttribute("class","");
+            this.style.animationPlayState = "paused";
+        }
+    };*/
+
+    music.addEventListener("touchstart",function(event){
+        if(audio.paused){
+            audio.play();
+            this.style.animationPlayState = "running";
+        } else {
+            audio.pause();
+            this.style.animationPlayState = "paused";
+        };
+    },false);
+
+    page1.addEventListener("touchstart",function(event){
+        page1.style.display = "none";
+        page2.style.display = "block";
+
+        setTimeout(function(){
+            page2.setAttribute("class", "page fadeOut");
+            page3.setAttribute("class", "page fadeIn");
+        },3000);
+    },false);
+</script>
 </html>
