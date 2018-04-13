@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>H5播放器</title>
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+<h3 class="playerTitle">视频播放器</h3>
+<div class="player">
+    <video src="./lib/mp4/video.mp4"></video>
+    <div class="controls">
+        <a href="javascript:;" class="switch fa fa-play"></a>
+        <a href="javascript:;" class="expand fa fa-expand"></a>
+        <div class="progress">
+            <div class="bar"></div>
+            <div class="loaded"></div>
+            <div class="elapse"></div>
+        </div>
+        <div class="time">
+            <span class="currentTime">00:00:00</span>
+            /
+            <span class="totalTime">00:00:00</span>
+        </div>
+    </div>
+</div>
+<script src="./js/jquery.min.js"></script>
+<script>
+    $(function () {
+        /*获取播放器*/
+        var video = $("video")[0];
+        /*实现播放暂停*/
+        $(".switch").click(function () {
+            /*实现播放与暂停的切换*/
+            if ( video.paused ) {
+                video.play();
+                //  移除暂停样式, 添加播放样式
+            } else {
+                video.pause();
+                //  移除播放样式, 添加暂停样式
+            }
+            /*设置标签样式, 使用 toggleClass 方法切换样式*/
+            $(this).toggleClass("fa-play fa-pause");
+        });
+
+        /*实现全屏操作*/
+        $(".expand").click(function () {
+            /*全屏  浏览器兼容性 ==> 能力测试*/
+            if ( video.requestFullscreen ) {
+                video.requestFullscreen();
+            }
+            else if ( video.webkitRequestFullScreen ) {
+                video.webkitRequestFullScreen();
+            }
+            else if ( video.mozRequestFullScreen ) {
+                video.mozRequestFullScreen();
+            }
+            else if ( video.msRequestFullScreen ) {
+                video.msRequestFullScreen();
+            }
+        });
+
+        /*实现播放逻辑   当视频文件可以播放时触发下面的事件*/
+        video.oncanplay = function () {
+            /*因为视频文件为本地文件,加载速度很快,为了模拟网络加载 所以延迟 2s*/
+            setTimeout(function () {
+                /*1. 将视频文件设置为显示     默认为隐藏*/
+                video.style.display = "block";
+                /*2. 使用 video.duration 获取当前视频总时长, 计算出时分秒;*/
+                var total = video.duration;
+                /*3. 计算时分秒  默认以秒作单位*/
+                var result = getResult( total );
+                /*4. 将计算结果展示在 dom 元素中*/
+                $(".totalTime").html( result );
+            },2000)
+        }
+
+        /*实现播放过程中的逻辑  当视频播放时会触发 ontimeupdata 事件*/
+        video.ontimeupdate = function () {
+            /*1. 使用 video.currentTime 获取当前的播放时间*/
+            var current = video.currentTime;
+            /*2. 计算出时分秒*/
+            var result = getResult( current );
+            /*3. 将结果展示在指定的 dom 元素中*/
+            $(".currentTime").html( result );
+            /*4. 设置当前播放进度条样式*/
+            var percent = current/video.duration * 100 + "%";   //  得到一个百分值
+            $(".elapse").css("width", percent);
+        }
+
+        /*实现视频的跳播功能*/
+        $(".bar").click(function (e) {
+            /*1. 获取当前鼠标相对于父元素的left值---偏移值*/
+            var offset = e.offsetX;
+            /*2. 计算偏移值相对于父元素总宽度的比例*/
+            var percent = offset/$(this).width();
+            /*3. 计算这个位置对应的视频进度值*/
+            var current = percent * video.duration;     //  计算鼠标点击位置的播放时间
+            /*4. 设置当前视频的 currentTime */
+            video.currentTime = current;        //  修改 currentTime 值会自动触发 ontimeupdate 事件;
+        });
+
+        /*播放完毕之后,重置播放器的状态*/
+        video.onended = function () {
+            /*将播放时间置为0*/
+            video.currentTime = 0;
+            /*修改播放暂停按钮样式*/
+            $(".switch").removeClass("fa-pause").addClass("fa-play");
+        }
+
+
+        /*通过总时长计算时分秒 方法封装*/
+        function getResult ( time ) {
+            var hour = Math.floor( time/3600 );
+            hour = hour<10 ? "0"+hour : hour;
+            var minute = Math.floor( time%3600/60 );
+            minute = minute<10 ? "0"+minute : minute;
+            var second = Math.floor( time%60 );
+            second = second<10 ? "0"+second : second;
+            /*返回结果*/
+            return hour + ":" + minute + ":" + second;
+        };
+    });
+</script>
+</body>
+</html>
