@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简单轮播图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul, li {
+            list-style: none;
+        }
+        .box {
+            width: 490px;
+            height: 170px;
+            margin: 100px auto;
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+        img {
+            vertical-align: top;
+        }
+        .inner {
+            width: 490px;
+            height: 170px;
+            background-color: skyblue;
+            overflow: hidden;
+            position: relative;
+        }
+        .inner ul {
+            width: 1000%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .inner li {
+            float: left;
+        }
+        .square {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+        .square span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #fff;
+            text-align: center;
+            line-height: 20px;
+            cursor: pointer;
+        }
+        .square span.current {
+            background-color: orangered;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box">
+        <div class="inner">
+            <ul>
+                <li><a href="#"><img src="images/01.jpg" alt=""></a></li>
+                <li><a href="#"><img src="images/02.jpg" alt=""></a></li>
+                <li><a href="#"><img src="images/03.jpg" alt=""></a></li>
+                <li><a href="#"><img src="images/04.jpg" alt=""></a></li>
+                <li><a href="#"><img src="images/05.jpg" alt=""></a></li>
+            </ul>
+            <div class="square">
+                <span class="current">1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        //  获取元素
+        var box = document.getElementById('box');
+        //  console.log(box.children);
+        var inner = box.children[0];
+        var ul = inner.children[0];
+        var square = inner.children[1];
+        var squares = square.children;
+        var imgWidth = inner.offsetWidth;
+
+        //  循环操作
+        for (var i = 0; i < squares.length; i++) {
+            squares[i].index = i;
+            squares[i].onmouseover = function () {
+                for (var j = 0; j < squares.length; j++) {
+                    squares[j].className = "";  //  先清空样式
+                };
+                this.className = "current";
+                var target = -imgWidth * this.index;
+                animate(ul,target);
+            }
+        }
+
+        /*
+         *   能够使任意对象移动到指定位置的动画函数
+         * */
+        function animate ( obj, target ) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+                var leader = obj.offsetLeft;
+                var step = 30;
+                step = leader < target ? step : -step;
+
+                //  判断当前位置与目标位置间的距离是否 >= 步长值
+                if (Math.abs(leader - target) >= Math.abs(step)) {
+                    leader += step;
+                    obj.style.left = leader + 'px';
+                } else {
+                    obj.style.left = target + 'px';
+                    clearInterval(obj.timer)
+                }
+            },15);
+        }
+    </script>
+</body>
+</html>
