@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>无缝滚动轮播图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul li {
+            list-style: none;
+        }
+        .box {
+            width: 300px;
+            height: 200px;
+            margin: 100px auto;
+            border: 1px solid skyblue;
+            background-color: skyblue;
+            position: relative;
+            overflow: hidden;
+        }
+        .box ul li {
+            float: left;
+        }
+        .box ul {
+            width: 1500px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="screen">
+        <ul>
+            <li><img src="./images/1.jpg" alt=""></li>
+            <li><img src="./images/2.jpg" alt=""></li>
+            <li><img src="./images/3.jpg" alt=""></li>
+            <li><img src="./images/4.jpg" alt=""></li>
+            <li><img src="./images/1.jpg" alt=""></li>
+        </ul>
+    </div>
+
+    <script>
+        var screen = document.getElementById('screen');
+        var ul = screen.children[0];
+        var timer = null;
+
+        screen.onmouseover = function () {
+            //  停止动画
+            clearInterval(timer);
+        }
+        screen.onmouseout = function () {
+            //  继续动画
+            timer = setInterval(play,15);
+        }
+
+        timer = setInterval(play,15);
+        function play() {
+            var leader = ul.offsetLeft;
+            var step = -3;
+            if (leader > -1200) {
+                leader = leader + step;
+                ul.style.left = leader + 'px';
+            } else {
+                ul.style.left = 0;
+            }
+        }
+    </script>
+</body>
+</html>
