@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>左右焦点轮播图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul li {
+            list-style: none;
+        }
+        .box {
+            width: 490px;
+            height: 270px;
+            padding: 5px;
+            border: 1px solid red;
+            margin: 100px auto;
+            position: relative;
+        }
+        .inner {
+            width: 490px;
+            height: 270px;
+            overflow: hidden;
+            position: relative;
+        }
+        .box img {
+            width: 490px;
+        }
+        .inner ol {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+        .inner ol li {
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            border: 1px solid #ccc;
+            text-align: center;
+            background-color: #fff;
+            float: left;
+            margin-left: 10px;
+            cursor: pointer;
+            _display: inline;
+        }
+        .inner ol li.current {
+            background-color: skyblue;
+        }
+        .inner ul li {
+            float: left;
+        }
+        .inner ul {
+            position: absolute;
+            top: 0;
+            width: 2940px;
+        }
+        .inner ul li.current {
+            display: block;
+        }
+        #arr {
+            display: none;
+        }
+        #arr span {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            margin-top: -20px;
+            background-color: #000;
+            cursor: pointer;
+            line-height: 40px;
+            text-align: center;
+            font-weight: bold;
+            font-family: '微软雅黑';
+            font-size: 30px;
+            color: #fff;
+            opacity: .3;
+            border: 1px solid #ccc;
+        }
+        #arr #right {
+            right: 5px;
+            left: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box">
+        <div class="inner">
+            <ul id="imgList">
+                <li><img src="./images/1.jpg" alt=""></li>
+                <li><img src="./images/2.jpg" alt=""></li>
+                <li><img src="./images/3.jpg" alt=""></li>
+                <li><img src="./images/4.jpg" alt=""></li>
+                <li><img src="./images/5.jpg" alt=""></li>
+            </ul>
+        </div>
+        <div id="arr">
+            <span id="left">&lt;</span>
+            <span id="right">&gt;</span>
+        </div>
+    </div>
+
+    <script>
+        //  获取元素
+        var arr = document.getElementById('arr');
+        var box = document.getElementById('box');
+        var right = document.getElementById('right');
+        var left = document.getElementById('left');
+        var ul = document.getElementById('imgList');
+        var imgs = ul.children;
+        var imgWidth = ul.children[0].offsetWidth;
+        box.onmouseover = function () {
+            arr.style.display = 'block';
+        }
+        box.onmouseout = function () {
+            arr.style.display = 'none';
+        }
+        var pic = 0;
+        right.onclick = function () {
+            if (pic < imgs.length - 1) {
+                pic++;
+                var target = -pic * imgWidth;
+                animate(ul, target);
+            }
+        };
+        left.onclick = function () {
+            if (pic > 0) {
+                pic--;
+                var target = -pic * imgWidth;
+                animate(ul, target);
+            }
+        }
+
+
+        /*
+         *   能够使任意对象移动到指定位置的动画函数
+         * */
+        function animate ( obj, target ) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+                var leader = obj.offsetLeft;
+                var step = 30;
+                step = leader < target ? step : -step;
+
+                //  判断当前位置与目标位置间的距离是否 >= 步长值
+                if (Math.abs(leader - target) >= Math.abs(step)) {
+                    leader += step;
+                    obj.style.left = leader + 'px';
+                } else {
+                    obj.style.left = target + 'px';
+                    clearInterval(obj.timer)
+                }
+            },15);
+        }
+    </script>
+
+</body>
+</html>
