@@ -5,6 +5,9 @@
 </template>
 
 <script>
+  /*import { List } from 'vant';
+  Vue.use( List );*/
+
 export default {
   name: 'App'
 }
