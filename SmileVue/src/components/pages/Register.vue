@@ -25,7 +25,7 @@
         required
       />
       <div class="register-button">
-        <van-button type="primary" @click="axiosRegisterUser" size="large">马上注册</van-button>
+        <van-button type="primary" @click="axiosRegisterUser" :loading="openLoading" size="large">马上注册</van-button>
       </div>
     </div>
 
@@ -42,6 +42,7 @@
       return {
         username: '',
         password: '',
+        openLoading: false, //是否开启用户的Loading
       }
     },
     methods: {
@@ -51,29 +52,33 @@
 
       //*********axios注册用户方法********
       axiosRegisterUser(){
+
         axios({
           url: url.registerUser,
           method: 'post',
           data:{
-            username:this.username,
+            userName:this.username,
             password:this.password
           }
         })
         .then(response => {
           console.log(response)
           //如果返回code为200，代表注册成功，我们给用户作Toast提示
-          if (response.data.code == 200) {
+          if(response.data.code == 200){
             Toast.success('注册成功')
-          } else {
+            this.$router.push('/')
+          }else{
             console.log(response.data.message)
             Toast.fail('注册失败')
+            this.openLoading = false
           }
-          console.log(response.data.code)
-      })
-      .catch((error) => {
-          console.log(error)
-      })
+        })
+        .catch((error) => {
+            Toast.fail('注册失败')
+          this.openLoading = false
+        })
       }
+
     },
   }
 </script>
