@@ -35,6 +35,7 @@
 <script>
   import axios from 'axios'
   import url from '@/serviceAPI.config.js'
+  import { Toast } from 'vant'
 
   export default {
     data() {
@@ -58,8 +59,16 @@
             password:this.password
           }
         })
-          .then(response => {
+        .then(response => {
           console.log(response)
+          //如果返回code为200，代表注册成功，我们给用户作Toast提示
+          if (response.data.code == 200) {
+            Toast.success('注册成功')
+          } else {
+            console.log(response.data.message)
+            Toast.fail('注册失败')
+          }
+          console.log(response.data.code)
       })
       .catch((error) => {
           console.log(error)
