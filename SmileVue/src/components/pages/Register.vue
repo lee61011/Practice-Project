@@ -25,7 +25,7 @@
         required
       />
       <div class="register-button">
-        <van-button type="primary" size="large">马上注册</van-button>
+        <van-button type="primary" @click="axiosRegisterUser" size="large">马上注册</van-button>
       </div>
     </div>
 
@@ -33,6 +33,9 @@
 </template>
 
 <script>
+  import axios from 'axios'
+  import url from '@/serviceAPI.config.js'
+
   export default {
     data() {
       return {
@@ -43,6 +46,24 @@
     methods: {
       goBack() {
         this.$router.go(-1)
+      },
+
+      //*********axios注册用户方法********
+      axiosRegisterUser(){
+        axios({
+          url: url.registerUser,
+          method: 'post',
+          data:{
+            username:this.username,
+            password:this.password
+          }
+        })
+          .then(response => {
+          console.log(response)
+      })
+      .catch((error) => {
+          console.log(error)
+      })
       }
     },
   }

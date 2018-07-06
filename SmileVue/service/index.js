@@ -6,6 +6,9 @@ const {connect , initSchemas} = require('./database/init.js')
 
 const Router = require( 'koa-router' )
 
+const bodyParser = require('koa-bodyparser');
+const cors = require('koa2-cors');
+
 
 
 let user = require( './appApi/user.js' )
@@ -18,7 +21,8 @@ router.use('/user',user.routes())
 //  加载路由中间件
 app.use(router.routes())
 app.use(router.allowedMethods())
-
+app.use(bodyParser)
+app.use(cors)
 
 //  立即执行函数
 ;(async () =>{
