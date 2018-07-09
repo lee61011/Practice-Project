@@ -2,7 +2,7 @@ const mongoose = require('mongoose')    //引入Mongoose
 const Schema = mongoose.Schema          //声明Schema
 let ObjectId = Schema.Types.ObjectId    //声明Object类型
 
-const bcrypt = require( 'bcrype' )
+const bcrypt = require( 'bcrypt' )
 
 //创建我们的用户Schema
 const userSchema = new Schema({
