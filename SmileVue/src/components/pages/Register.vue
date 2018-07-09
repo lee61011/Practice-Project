@@ -15,6 +15,7 @@
         placeholder="请输入用户名"
         required
         @click-icon="username = ''"
+        :error-message = "usernameErrorMsg"
       />
 
       <van-field
@@ -22,10 +23,11 @@
         type="password"
         label="密码"
         placeholder="请输入密码"
+        :error-message = "passwordErrorMsg"
         required
       />
       <div class="register-button">
-        <van-button type="primary" @click="axiosRegisterUser" :loading="openLoading" size="large">马上注册</van-button>
+        <van-button type="primary" @click="registerAction" :loading="openLoading" size="large">马上注册</van-button>
       </div>
     </div>
 
@@ -42,7 +44,9 @@
       return {
         username: '',
         password: '',
-        openLoading: false, //是否开启用户的Loading
+        openLoading: false,     //是否开启用户的Loading
+        usernameErrorMsg: '',   //当用户名出现错误的时候
+        passwordErrorMsg: ''    //当用户密码出现错误的时候
       }
     },
     methods: {
@@ -50,9 +54,25 @@
         this.$router.go(-1)
       },
 
+      checkForm(){
+        let isOk = true;
+        if (this.username.length < 5) {
+          this.usernameErrorMsg = "用户名不能小于 5 位";
+          isOk = false;
+        } else {
+          this.usernameErrorMsg = '';
+        }
+        if (this.password.length < 6) {
+          this.passwordErrorMsg = "密码不能小于 6 位";
+          isOk = false;
+        } else {
+          this.passwordErrorMsg = '';
+        }
+        return isOk;
+      },
+
       //*********axios注册用户方法********
       axiosRegisterUser(){
-
         axios({
           url: url.registerUser,
           method: 'post',
@@ -77,8 +97,11 @@
             Toast.fail('注册失败')
           this.openLoading = false
         })
-      }
+      },
 
+      registerAction(){
+        this.checkForm() && this.axiosRegisterUser();
+      }
     },
   }
 </script>
