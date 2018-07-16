@@ -48,6 +48,12 @@
         passwordErrorMsg:'',   //当密码出现错误的时候
       }
     },
+    created(){
+      if(localStorage.userInfo){
+        Toast.success('您已经登录过了!')
+        this.$router.push('/');
+      }
+    },
     methods: {
       goBack() {
         this.$router.go(-1)
@@ -73,14 +79,29 @@
           }
         }).then(response => {
           //如果返回code为200，代表注册成功，我们给用户作Toast提示
-          if(response.data.code == 200){
-            Toast.success('登陆成功')
+          if(response.data.code == 200 && response.data.message){
+            /*Toast.success('登陆成功')
+            this.$router.push('/')*/
+
+            new Promise((resolve,reject) => {
+              localStorage.userInfo = {userName: this.username}
+              setTimeout(()=>{resolve()},500)
+            }).then(()=>{
+              Toast.success('登录成功')
+              this.$router.push('/')
+            }).catch(err=>{
+              Toast.fail('登录状态保存失败')
+              console.log(err)
+            })
+
           }else{
             console.log(response.data.message)
             Toast.fail('登陆失败')
+            this.openLoading = false
           }
         }).catch((error) => {
           Toast.fail('登陆失败')
+          this.openLoading = false
         })
 
       },
