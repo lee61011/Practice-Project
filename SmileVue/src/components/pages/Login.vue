@@ -65,7 +65,7 @@
         this.openLoading = true
 
         axios({
-          url: url.registerUser,
+          url: url.login,
           method: 'post',
           data:{
             userName:this.username,
