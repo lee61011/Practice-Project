@@ -1,5 +1,5 @@
-const Koa = require('koa');
-const app = new Koa();
+/*const Koa = require('koa');
+const app = new Koa();*/
 const Router = require('koa-router');
 let router = new Router();
 
@@ -61,6 +61,20 @@ router.get('/insertAllCategorySub',async(ctx)=>{
     })
   })
   ctx.body = "开始导入数据"
+});
+
+/*	获取商品详细信息的接口  */
+router.post('/getDetailGoodsInfo',async(ctx)=>{
+  let goodsId = ctx.request.body.goodsId;
+  const Goods = mongoose.model('Goods');
+  await Goods.findOne({ID:goodsId}).exec()
+    .then(async(result) => {
+      ctx.body = {code:200,message:result}
+    })
+    .catch(error => {
+      console.log(error);
+      ctx.body = {code:500,message:error}
+    })
 });
 
 module.exports = router;
