@@ -14,8 +14,9 @@
       }
     },
     created(){
-
-      this.getInfo()
+      this.goodsId = this.$route.query.goodsId;
+      console.log(this.goodsId);
+      this.getInfo();
     },
     methods: {
       getInfo() {
