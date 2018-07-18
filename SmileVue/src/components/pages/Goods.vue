@@ -1,6 +1,16 @@
 <template>
   <div>
-    商品详情页面
+    <div class="navbar-div">
+      <van-nav-bar
+        title="商品详情"
+        left-text="返回"
+        left-arrow
+        @click-left="onClickLeft"
+      />
+    </div>
+    <div class="topimage-div">
+      <img :src="goodsInfo.IMAGE1" width="100%">
+    </div>
   </div>
 </template>
 
@@ -10,7 +20,9 @@
   export default {
     data() {
       return {
-        goodsId: '775e575ce28a4f89b1dfe2c99eb08ae7'
+        //  goodsId: '775e575ce28a4f89b1dfe2c99eb08ae7'
+        goodsId: '',
+        goodsInfo: {},		//	商品详细数据
       }
     },
     created(){
@@ -27,13 +39,23 @@
             goodsId:this.goodsId
           }
         })
-          .then(response=>{
-          console.log(response)
-      })
-      .catch(error=>{
+        .then(response=>{
+
+          if(response.data.code == 200 && response.data.message ){
+            this.goodsInfo = response.data.message
+          }else{
+            Toast('服务器错误，数据取得失败')
+          }
+          console.log( this.goodsInfo )
+
+        })
+        .catch(error=>{
           console.log(error)
-      })
-      }
+        })
+      },
+      onClickLeft(){
+        this.$router.go(-1);
+      },
     },
   }
 </script>
