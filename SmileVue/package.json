@@ -11,8 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "glob": "^7.1.2",
-    "mongoose": "^5.2.1",
+    "koa": "^2.5.2",
     "vant": "^1.1.9",
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^3.1.3",

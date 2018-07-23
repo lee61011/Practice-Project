@@ -1,5 +1,4 @@
-/*
-const Koa = require( 'koa' )
+/*const Koa = require( 'koa' )
 const app = new Koa()
 
 const mongoose = require('mongoose')
@@ -30,7 +29,7 @@ app.use(cors)
   await connect()
   initSchemas()
   const User = mongoose.model('User')
-  let oneUser = new User({userName:'jspang',password:'123456'})
+  let oneUser = new User({userName:'zhangsan',password:'zs123zs'})
   oneUser.save().then(()=>{
     console.log('插入成功')
   })
@@ -55,8 +54,9 @@ app.use(async(ctx)=>{
 
 app.listen(3000,()=>{
   console.log('[Server] starting at port 3000')
-})
-*/
+})*/
+
+
 
 const Koa = require('koa')
 const app = new Koa()
