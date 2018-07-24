@@ -26,15 +26,17 @@
           </div>
 
           <div id="list-div">
-            <van-list
-              v-model="loading"
-              :finished="finished"
-              @load="onLoad"
-            >
-              <div class="list-item" v-for="item in list" :key="item">
-                {{item}}
-              </div>
-            </van-list>
+            <van-pull-refresh v-model="isRefresh" @refresh="onRefresh">
+              <van-list
+                v-model="loading"
+                :finished="finished"
+                @load="onLoad"
+              >
+                <div class="list-item" v-for="item in list" :key="item">
+                  {{item}}
+                </div>
+              </van-list>
+            </van-pull-refresh>
           </div>
         </van-col>
       </van-row>
@@ -56,6 +58,7 @@
         list: [],
         loading: false, //  上拉加载的使用
         finished: false,//  下拉加载是否没有数据了
+        isRefresh: false, //  下拉加载
       }
     },
 
@@ -116,15 +119,24 @@
 
       //  上拉加载
       onLoad(){
-        setTimeout(()=>{
-          for(let i = 0; i < 10; i++) {
-          this.list.push(this.list.length+1);
-        }
-        this.loading = false;
-        if ( this.list.length >= 40 ) {
-          this.finished = true;
-        }
-      },500);
+          setTimeout(()=>{
+            for(let i = 0; i < 10; i++) {
+            this.list.push(this.list.length+1);
+          }
+          this.loading = false;
+          if ( this.list.length >= 40 ) {
+            this.finished = true;
+          }
+        },500);
+        },
+
+      //  重新加载数据
+      onRefresh(){
+        setTimeout( ()=>{
+          this.isRefresh = false;
+          this.list = [];
+          this.onLoad();
+        }, 500);
       },
     },
 
