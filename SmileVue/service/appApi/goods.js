@@ -87,7 +87,7 @@ router.get('/getCategoryList',async(ctx) => {
   }
 });
 
-router.get('/getCategorySubList',async(ctx) => {
+router.post('/getCategorySubList',async(ctx) => {
   try{
     let categoryId = ctx.request.body.categoryId;
     //  let categoryId = 1;

@@ -17,7 +17,14 @@
         </van-col>
 
         <van-col span="18">
-          右侧列表
+          <div class="tabCategorySub">
+            <van-tabs v-model="active">
+              <van-tab v-for="(item, index) in categorySub" :key="index" :title="item.MALL_SUB_NAME">
+
+              </van-tab>
+            </van-tabs>
+          </div>
+
         </van-col>
       </van-row>
     </div>
@@ -33,6 +40,8 @@
       return {
         category: [],
         categoryIndex:0,
+        categorySub:[],  //小类类别
+        active:0,       //激活标签的值
       }
     },
 
@@ -54,6 +63,7 @@
           console.log(response)
           if (response.data.code == 200 && response.data.message) {
             this.category = response.data.message;
+            this.getCategorySubByCategoryId( this.category[0].ID );
           } else {
             Toast('服务器错误，数据取得失败')
           }
@@ -64,10 +74,32 @@
       },
 
       //点击大类的方法
-      clickCategory(index){
-        this.categoryIndex=index
+      clickCategory(index,categoryId){
+        this.categoryIndex=index;
+        this.getCategorySubByCategoryId( categoryId );
       }
     },
+
+    //根据大类ID读取小类类别列表
+    getCategorySubByCategoryId(categoryId){
+
+      axios({
+        url:url.getCategorySubList,
+        method:'post',
+        data:{categoryId:categoryId}
+      })
+        .then(response=>{
+        if(response.data.code == 200 && response.data.message ){
+        this.categorySub=response.data.message
+        this.active = 0
+      }else{
+        Toast('服务器错误，数据取得失败')
+      }
+    })
+    .catch(error=>{
+        console.log(error)
+    })
+    }
   }
 </script>
 
