@@ -25,6 +25,17 @@
             </van-tabs>
           </div>
 
+          <div id="list-div">
+            <van-list
+              v-model="loading"
+              :finished="finished"
+              @load="onLoad"
+            >
+              <div class="list-item" v-for="item in list" :key="item">
+                {{item}}
+              </div>
+            </van-list>
+          </div>
         </van-col>
       </van-row>
     </div>
@@ -42,6 +53,9 @@
         categoryIndex:0,
         categorySub:[],  //小类类别
         active:0,       //激活标签的值
+        list: [],
+        loading: false, //  上拉加载的使用
+        finished: false,//  下拉加载是否没有数据了
       }
     },
 
@@ -52,6 +66,7 @@
     mounted(){
       let winHeight = document.documentElement.clientHeight;
       document.getElementById("leftNav").style.height = winHeight - 46 + "px";
+      document.getElementById("list-div").style.height = winHeight - 90 + "px";
     },
 
     methods: {
@@ -77,29 +92,43 @@
       clickCategory(index,categoryId){
         this.categoryIndex=index;
         this.getCategorySubByCategoryId( categoryId );
-      }
+      },
+
+      //根据大类ID读取小类类别列表
+      getCategorySubByCategoryId(categoryId){
+        axios({
+          url:url.getCategorySubList,
+          method:'post',
+          data:{categoryId:categoryId}
+        })
+        .then(response=>{
+          if(response.data.code == 200 && response.data.message ){
+            this.categorySub=response.data.message
+            this.active = 0
+          }else{
+            Toast('服务器错误，数据取得失败')
+          }
+        })
+        .catch(error=>{
+          console.log(error)
+        })
+      },
+
+      //  上拉加载
+      onLoad(){
+        setTimeout(()=>{
+          for(let i = 0; i < 10; i++) {
+          this.list.push(this.list.length+1);
+        }
+        this.loading = false;
+        if ( this.list.length >= 40 ) {
+          this.finished = true;
+        }
+      },500);
+      },
     },
 
-    //根据大类ID读取小类类别列表
-    getCategorySubByCategoryId(categoryId){
 
-      axios({
-        url:url.getCategorySubList,
-        method:'post',
-        data:{categoryId:categoryId}
-      })
-        .then(response=>{
-        if(response.data.code == 200 && response.data.message ){
-        this.categorySub=response.data.message
-        this.active = 0
-      }else{
-        Toast('服务器错误，数据取得失败')
-      }
-    })
-    .catch(error=>{
-        console.log(error)
-    })
-    }
   }
 </script>
 
@@ -116,5 +145,15 @@
   }
   .categoryActive{
     background-color: #fff;
+  }
+
+  .list-item{
+    text-align: center;
+    line-height: 80px;
+    border-bottom: 1px solid #f0f0f0;
+    background-color: #fff;
+  }
+  #list-div{
+    overflow: scroll;
   }
 </style>
