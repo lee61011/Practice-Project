@@ -27,13 +27,21 @@
 
           <div id="list-div">
             <van-pull-refresh v-model="isRefresh" @refresh="onRefresh">
-              <van-list
-                v-model="loading"
-                :finished="finished"
-                @load="onLoad"
-              >
-                <div class="list-item" v-for="item in list" :key="item">
-                  {{item}}
+              <van-list v-model="loading" :finished="finished" @load="onLoad">
+                <div class="list-item" @click="goGoodsInfo(item.ID)" v-for="(item,index) in goodList" :key="index">
+                  <div class="list-item-img">
+                    <img :src="item.IMAGE1"
+                         width="100%"
+                         :onerror="errorImg"
+                    />
+
+
+
+                  </div>
+                  <div class="list-item-text">
+                    <div>{{item.NAME}}</div>
+                    <div>￥{{item.ORI_PRICE | moneyFilter}}</div>
+                  </div>
                 </div>
               </van-list>
             </van-pull-refresh>
@@ -59,6 +67,9 @@
         loading: false, //  上拉加载的使用
         finished: false,//  下拉加载是否没有数据了
         isRefresh: false, //  下拉加载
+        page: 1,			//	商品列表的页数
+        goodList: [],		//	商品信息
+        categorySubId: ''	//	商品字分类ID
       }
     },
 
@@ -94,6 +105,9 @@
       //点击大类的方法
       clickCategory(index,categoryId){
         this.categoryIndex=index;
+        this.page = 1;
+        this.finished = false;
+        this.goodList = [];
         this.getCategorySubByCategoryId( categoryId );
       },
 
@@ -129,6 +143,16 @@
           }
         },500);
         },
+      //下拉刷新方法
+      onRefresh(){
+        setTimeout(()=>{
+          this.isRefresh=false;
+        this.finished = false;
+        this.goodList=[]
+        this.page=1
+        this.onLoad()
+      },500)
+      },
 
       //  重新加载数据
       onRefresh(){
@@ -138,6 +162,41 @@
           this.onLoad();
         }, 500);
       },
+
+      getGoodList(){
+        axios({
+          url: url.getGoodListByCategorySubID,
+          method: 'post',
+          data: {
+            categorySubId: this.categorySubId,
+            page: this.page
+          }
+        }).then(response = > {
+          console.log(response);
+          if (response.data.code == 200 && response.data.message.length) {
+            this.page++;
+            this.goodList = this.goodList.concat(response.data.message)
+          } else {
+            this.finished = true;
+          }
+          this.loading = false;
+          console.log(this.finished);
+        }).catch(error = > {
+            console.log(error);
+        })
+      },
+
+      //	点击子类获取商品信息
+      onClickCategorySub(index,title){
+        this.categorySubId = this.categorySub[index].ID;
+        console.log(this.categorySubId);
+
+        this.goodList = [];
+        this.finished = false;
+        this.page = 1;
+        this.onLoad();
+      }
+
     },
 
 
@@ -167,5 +226,25 @@
   }
   #list-div{
     overflow: scroll;
+  }
+
+  .list-item{
+    display: flex;
+    flex-direction: row;
+    font-size:0.8rem;
+    border-bottom: 1px solid #f0f0f0;
+    background-color: #fff;
+    padding:5px;
+  }
+  #list-div{
+    overflow: scroll;
+  }
+  .list-item-img{
+    flex:8;
+  }
+  .list-item-text{
+    flex:16;
+    margin-top:10px;
+    margin-left:10px;
   }
 </style>
