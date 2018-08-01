@@ -27,20 +27,16 @@
 
           <div id="list-div">
             <van-pull-refresh v-model="isRefresh" @refresh="onRefresh">
-              <van-list v-model="loading" :finished="finished" @load="onLoad">
-                <div class="list-item" @click="goGoodsInfo(item.ID)" v-for="(item,index) in goodList" :key="index">
-                  <div class="list-item-img">
-                    <img :src="item.IMAGE1"
-                         width="100%"
-                         :onerror="errorImg"
-                    />
-
-
-
-                  </div>
+              <van-list
+                v-model="loading"
+                :finished="finished"
+                @load="onLoad"
+              >
+                <div class="list-item" v-for="(item,index) in goodList" :key="index">
+                  <div class="list-item-img"><img :src="item.IMAGE1" width="100%"/></div>
                   <div class="list-item-text">
                     <div>{{item.NAME}}</div>
-                    <div>￥{{item.ORI_PRICE | moneyFilter}}</div>
+                    <div class="">￥{{item.ORI_PRICE}}</div>
                   </div>
                 </div>
               </van-list>
@@ -171,7 +167,7 @@
             categorySubId: this.categorySubId,
             page: this.page
           }
-        }).then(response = > {
+        }).then(response => {
           console.log(response);
           if (response.data.code == 200 && response.data.message.length) {
             this.page++;
@@ -181,7 +177,7 @@
           }
           this.loading = false;
           console.log(this.finished);
-        }).catch(error = > {
+        }).catch(error => {
             console.log(error);
         })
       },
