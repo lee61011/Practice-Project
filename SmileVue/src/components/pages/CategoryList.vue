@@ -141,24 +141,14 @@
         },
       //下拉刷新方法
       onRefresh(){
-        setTimeout(()=>{
-          this.isRefresh=false;
-        this.finished = false;
-        this.goodList=[]
-        this.page=1
-        this.onLoad()
-      },500)
-      },
-
-      //  重新加载数据
-      onRefresh(){
-        setTimeout( ()=>{
+        setTimeout(() => {
           this.isRefresh = false;
-          this.list = [];
-          this.onLoad();
-        }, 500);
+          this.finished = false;
+          this.goodList = []
+          this.page = 1
+          this.onLoad()
+        },500)
       },
-
       getGoodList(){
         axios({
           url: url.getGoodListByCategorySubID,
