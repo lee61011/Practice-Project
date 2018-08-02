@@ -33,7 +33,7 @@
                 @load="onLoad"
               >
                 <div class="list-item" v-for="(item,index) in goodList" :key="index">
-                  <div class="list-item-img"><img :src="item.IMAGE1" width="100%"/></div>
+                  <div class="list-item-img"><img :src="item.IMAGE1" width="100%" :onerror="errorImg"/></div>
                   <div class="list-item-text">
                     <div>{{item.NAME}}</div>
                     <div class="">￥{{item.ORI_PRICE}}</div>
@@ -65,7 +65,8 @@
         isRefresh: false, //  下拉加载
         page: 1,			//	商品列表的页数
         goodList: [],		//	商品信息
-        categorySubId: ''	//	商品字分类ID
+        categorySubId: '',	//	商品字分类ID
+        errorImg: 'this.src="' + require('@/assets/images/errorimg.png') + '"',   //  错误图片显示路径
       }
     },
 
