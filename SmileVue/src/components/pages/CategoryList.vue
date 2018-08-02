@@ -32,11 +32,11 @@
                 :finished="finished"
                 @load="onLoad"
               >
-                <div class="list-item" v-for="(item,index) in goodList" :key="index">
+                <div class="list-item" @click="goGoodsInfo(item.ID)" v-for="(item,index) in goodList" :key="index">
                   <div class="list-item-img"><img :src="item.IMAGE1" width="100%" :onerror="errorImg"/></div>
                   <div class="list-item-text">
                     <div>{{item.NAME}}</div>
-                    <div class="">￥{{item.ORI_PRICE}}</div>
+                    <div>￥{{item.ORI_PRICE | moneyFilter}}</div>
                   </div>
                 </div>
               </van-list>
@@ -51,6 +51,7 @@
 <script>
   import axios from 'axios'
   import url from '@/serviceAPI.config.js'
+  import {toMoney} from '@/filter/moneyFilter.js'
 
   export default {
     data(){
@@ -67,6 +68,12 @@
         goodList: [],		//	商品信息
         categorySubId: '',	//	商品字分类ID
         errorImg: 'this.src="' + require('@/assets/images/errorimg.png') + '"',   //  错误图片显示路径
+      }
+    },
+
+    filters:{
+      moneyFilter(money){
+        return toMoney(money);
       }
     },
 
@@ -140,6 +147,7 @@
           }
         },500);
         },
+
       //下拉刷新方法
       onRefresh(){
         setTimeout(() => {
@@ -150,6 +158,7 @@
           this.onLoad()
         },500)
       },
+
       getGoodList(){
         axios({
           url: url.getGoodListByCategorySubID,
@@ -182,7 +191,11 @@
         this.finished = false;
         this.page = 1;
         this.onLoad();
-      }
+      },
+
+      goGoodsInfo (id) {
+        this.$router.push({name: 'Goods', params: {goodsId: id}})
+      },
 
     },
 
