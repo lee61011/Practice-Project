@@ -97,12 +97,12 @@
         if(!isHaveGoods){
           //没有商品直接添加到数组中
           //重新组成添加到购物车的信息
-          let newGoodsInfo={
-            goodsId:this.goodsInfo.ID,
-            Name:this.goodsInfo.Name,
-            price:this.goodsInfo.PRESENT_PRICE,
-            image:this.goodsInfo.IMAGE1,
-            count:1
+          let newGoodsInfo = {
+            goodsId: this.goodsInfo.ID,
+            Name: this.goodsInfo.NAME,
+            price: this.goodsInfo.PRESENT_PRICE,
+            image: this.goodsInfo.IMAGE1,
+            count: 1
           }
           cartInfo.push(newGoodsInfo) //添加到购物车
           localStorage.cartInfo=JSON.stringify(cartInfo) //操作本地数据
