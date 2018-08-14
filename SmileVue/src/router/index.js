@@ -21,6 +21,6 @@ export default new Router({
     },
     { path: '/register', name: 'Register', component: Register},
     { path: '/login', name: 'Login', component: Login},
-    { path: '/Goods', name: 'Goods', component: Goods},
+    { path: '/goods', name: 'Goods', component: Goods},
   ]
 })

@@ -17,10 +17,23 @@
   export default {
     data() {
       return {
-        active: 0
+        active: 0,
+        nowPath: '',    //  当前路径
       }
     },
+    created(){
+      this.changeTabBarActive();
+    },
+    updated(){
+      this.changeTabBarActive();
+    },
     methods: {
+      changeTabBarActive(){
+        this.nowPath = this.$route.path;
+        if (this.nowPath == '/Cart') {
+          this.active = 2;
+        }
+      },
       changeTabbar(active) {
         console.log(active)
         switch(active){
