@@ -3,6 +3,24 @@ const toolkit = require("./toolkit")
 const matrix = toolkit.makeMatrix();
 console.log(matrix);
 
-const a = Array.from({length: 9}, (v, i) => i);
-console.log(a);
-console.log(toolkit.shuffle(a))
+class Grid {
+    constructor(container) {
+        this._$container = container;
+    }
+
+    build() {
+        const matrix = toolkit.makeMatrix();
+
+        const $cells = matrix.map(rowValues => rowValues.map(cellValue => {
+            return $("<span>").text(cellValue);
+        }));
+
+        const $divArray = $cells.map($spanArray => {
+            return $("<div>").append($spanArray);
+        });
+
+        this._$container.append($divArray);
+    }
+}
+
+new Grid($("#container")).build();
