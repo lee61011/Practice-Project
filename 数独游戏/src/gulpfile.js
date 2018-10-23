@@ -19,6 +19,33 @@ gulp.task("less", () => {
 
 gulp.task("default", ["webpack", "less"])*/
 
+/*
+ const gulp = require("gulp");
+
+ // 编译JavaScript
+ gulp.task("webpack", () => {
+ const webpack = require("webpack-stream");
+ const config = require("./webpack.config.js");
+ gulp.src("./js/!**!/!*.js")
+ .pipe(webpack(config))
+ .pipe(gulp.dest("../www/js"));
+ });
+
+ // 编译less -> css
+ gulp.task("less", () => {
+ const less = require("gulp-less");
+ gulp.src("./less/!*.less")
+ .pipe(less())
+ .pipe(gulp.dest("../www/css/"));
+ });
+
+ gulp.task("default", ["webpack", "less"]);
+
+ gulp.task("watch", () => {
+ gulp.watch("less/!**!/!*.less", ["less"]);
+ gulp.watch("js/!**!/!*.js", ["webpack"]);
+ })*/
+
 
 const gulp = require("gulp");
 const gutil = require("gulp-util");
@@ -53,36 +80,9 @@ gulp.task("less", () => {
 
 gulp.task("default", gulp.parallel("webpack", "less"));
 
+
+/*   当 .less 文件和 .js 文件发生变化时自动执行打包功能   */
 gulp.task("watch", () => {
-    gulp.watch("less/!**!/!*.less", ["less"]);
-    gulp.watch(["ts/!**!/!*.js", "ts/!**/!*.ts"], ["webpack"]);
+    gulp.watch("less/**/*.less", ["less"]);
+    gulp.watch(["ts/**/*.js", "ts/**/*.ts"], ["webpack"]);
 });
-
-
-
-/*
-const gulp = require("gulp");
-
-// 编译JavaScript
-gulp.task("webpack", () => {
-    const webpack = require("webpack-stream");
-    const config = require("./webpack.config.js");
-    gulp.src("./js/!**!/!*.js")
-        .pipe(webpack(config))
-        .pipe(gulp.dest("../www/js"));
-});
-
-// 编译less -> css
-gulp.task("less", () => {
-    const less = require("gulp-less");
-    gulp.src("./less/!*.less")
-        .pipe(less())
-        .pipe(gulp.dest("../www/css/"));
-});
-
-gulp.task("default", ["webpack", "less"]);
-
-gulp.task("watch", () => {
-    gulp.watch("less/!**!/!*.less", ["less"]);
-    gulp.watch("js/!**!/!*.js", ["webpack"]);
-})*/
