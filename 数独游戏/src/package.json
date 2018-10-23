@@ -1,16 +1,12 @@
 {
   "name": "sudoku",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/gulp && ./node_modules/.bin/gulp watch",
-    "dev": "./node_modules/.bin/gulp"
-  },
+  "repository": {},
   "author": "",
-  "license": "ISC",
-  "dependencies": {},
+  "license": "Apache License 2.0",
+  "scripts": {
+    "build": "gulp"
+  },
   "devDependencies": {
     "@types/jquery": "^3.3.0",
     "babel-core": "^6.26.3",
