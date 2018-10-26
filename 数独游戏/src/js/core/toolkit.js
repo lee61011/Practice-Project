@@ -23,6 +23,13 @@ const matrixToolkit = {
             [array[i], array[j]] = [array[j], array[i]];
         }
         return array;
+    },
+
+    /*
+    *   检查指定位置可以填写数字 n
+    * */
+    checkFillable() {
+        return true;
     }
 };
 
