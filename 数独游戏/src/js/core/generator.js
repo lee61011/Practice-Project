@@ -5,6 +5,9 @@ class Generator {
 
     generate() {
         this.matrix = ToolKit.matrix.makeMatrix();
+        this.orders = ToolKit.matrix.makeMatrix()
+            .map(row => row.map((v, i) => i))
+            .map(row => ToolKit.matrix.shuffle(row));
 
         for (let n = 1; n <= 9; n++) {
             this.fillNumber(n);
@@ -21,6 +24,7 @@ class Generator {
         }
 
         const row = this.matrix[rowIndex];
+        //  TODO 随机选择列
         for (let i = 0; i < 9; i++) {
             const colIndex = i;
             //  如果这个位置已经有值, 跳过
