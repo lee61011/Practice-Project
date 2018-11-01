@@ -28,7 +28,13 @@ const matrixToolkit = {
     /*
     *   检查指定位置可以填写数字 n
     * */
-    checkFillable() {
+    checkFillable(matrix, n, rowIndex, colIndex) {
+        const row = matrix[rowIndex];
+        const colum = this.makeRow().map((v, i) => matrix[i][colIndex]);
+        const { boxIndex } = boxToolkit.convertToBoxIndex( rowIndex, colIndex );
+
+        //  const boxIndex =
+        //  const box = ... ...
         return true;
     }
 };
@@ -36,8 +42,21 @@ const matrixToolkit = {
 /*
 *   宫坐标系工具
 * */
-const boxToolit = {
-    //  TODO
+const boxToolkit = {
+    convertToBoxIndex( rowIndex, colIndex ) {
+        return {
+            boxIndex: Math.floor(rowIndex / 3) * 3 + Math.floor(colIndex / 3),
+            cellIndex: rowIndex % 3 * 3 + colIndex % 3
+        };
+    },
+
+
+    converFromBoxIndex(boxIndex, cellIndex) {
+        return {
+            rowIndex: Math.floor(boxIndex / 3) * 3 + Math.floor(cellIndex / 3),
+            colIndex: boxIndex % 3 * 3 + cellIndex % 3
+        };
+    }
 };
 
 
