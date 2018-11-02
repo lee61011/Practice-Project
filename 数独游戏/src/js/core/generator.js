@@ -4,18 +4,30 @@ const ToolKit = require("./toolkit")
 class Generator {
 
     generate() {
+        while ( !this.internalGenerate() ) {
+            //  TODO
+            console.warn("try again");
+        }
+    }
+
+    internalGenerate() {
         this.matrix = ToolKit.matrix.makeMatrix();
         this.orders = ToolKit.matrix.makeMatrix()
             .map(row => row.map((v, i) => i))
             .map(row => ToolKit.matrix.shuffle(row));
 
+        ToolKit.matrix.makeRow()
+            every((n ))
         for (let n = 1; n <= 9; n++) {
-            this.fillNumber(n);
+            if ( !this.fillNumber(n) ) {
+                return false;
+            }
         }
+        return true;
     }
 
     fillNumber(n) {
-        this.fillRow(n, 0);
+        return this.fillRow(n, 0);
     }
 
     fillRow(n, rowIndex) {
@@ -51,3 +63,7 @@ class Generator {
         return false;
     }
 }
+
+const generator = new Generator();
+generator.generate();
+console.log(generator.matrix);
