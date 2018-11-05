@@ -27,3 +27,55 @@ function checkArray( array ) {
 
     return marks;
 }
+
+
+const Toolkit = require("./toolkit")
+
+//  输入: matrix, 用户完成的数独数据, 9*9
+//  处理: 对 matrix 行、列、宫进行检查, 并填写 marks
+//  输出: 检查是否成功、marks
+
+class Checker {
+
+    constructor(matrix) {
+        this._matrix = matrix;
+        this._matrixMarks = Toolkit.matrix.makeMatrix(true);
+    }
+
+    get matrixMarks() {
+        return this._matrixMarks;
+    }
+
+    get isSuccess() {
+        return this._success;
+    }
+
+    check() {
+        this.checkRows();
+        this.checkCols();
+        this.checkBoxes();
+
+        //  检查是否成功
+        //  Array.prototype.every()
+        this._success = this._matrixMarks.every(row => row.every(mark => mark));
+        return this._success;
+    }
+
+
+    checkRows() {
+        for( let rowIndex = 0; rowIndex < 9; rowIndex++) {
+            const row = this._matrix[rowIndex];
+            const marks = checkArray(row);
+
+            for (let colIndex = 0; colIndex < marks.length; colIndex++) {
+                if (!marks[colIndex]) {
+                    this._matrixMarks[rowIndex][colIndex] = false;
+                }
+            }
+        }
+    }
+
+    checkCols() {
+        
+    }
+}
