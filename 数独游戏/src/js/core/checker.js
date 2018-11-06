@@ -76,6 +76,33 @@ class Checker {
     }
 
     checkCols() {
-        
+        for (let colIndex = 0; colIndex < 9; colIndex++) {
+            const cols = [];
+            for (let rowIndex = 0; rowIndex < 9; rowIndex++) {
+                cols[rowIndex] = this._matrix[rowIndex][colIndex];
+            }
+
+            const marks = checkArray(cols);
+            for (let rowIndex = 0; rowIndex < marks.length; rowIndex++) {
+                if (!marks[rowIndex]) {
+                    this._matrixMarks[rowIndex][colIndex] = false;
+                }
+            }
+        }
+    }
+
+
+    checkBoxes() {
+        for (let boxIndex = 0; boxIndex < 9; boxIndex++) {
+            const boxes = Toolkit.box.getBoxCells(boxIndex);
+            const marks = checkArray(boxes);
+            for (let cellIndex = 0; cellIndex < 9; cellIndex++) {
+                if (!marks[cellIndex]) {
+                    const { rowIndex, colIndex }
+                        = Toolkit.box.convertFromBoxIndex(boxIndex, cellIndex);
+                    this._matrixMarks[rowIndex][colIndex] = false;
+                }
+            }
+        }
     }
 }

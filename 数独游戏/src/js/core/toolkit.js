@@ -72,7 +72,7 @@ const boxToolkit = {
     },
 
 
-    converFromBoxIndex(boxIndex, cellIndex) {
+    convertFromBoxIndex(boxIndex, cellIndex) {
         return {
             rowIndex: Math.floor(boxIndex / 3) * 3 + Math.floor(cellIndex / 3),
             colIndex: boxIndex % 3 * 3 + cellIndex % 3
