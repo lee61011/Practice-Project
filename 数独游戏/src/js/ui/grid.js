@@ -45,6 +45,11 @@ class Grid {
                 "font-size": width < 32 ? `${width / 2}px` : ""
             });
     }
+
+
+    bindPopup(popupNumbers) {
+        //  TODO        1109
+    }
 }
 
 module.exports = Grid;
