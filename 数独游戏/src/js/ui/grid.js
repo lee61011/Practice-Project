@@ -48,7 +48,10 @@ class Grid {
 
 
     bindPopup(popupNumbers) {
-        //  TODO        1109
+        this._$container.on("click", "span", e => {
+            const $cell = $(e.target);
+            popupNumbers.popup($cell);
+        });
     }
 }
 
