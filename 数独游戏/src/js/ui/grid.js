@@ -2,6 +2,7 @@
 const Toolkit = require("../core/toolkit");
 //  const Generator = require("../core/generator");
 const Sudoku = require("../core/sudoku");
+const Checker = require("../core/checker");
 
 class Grid {
     constructor(container) {
@@ -46,6 +47,40 @@ class Grid {
             });
     }
 
+    /*
+    *   检查用户解谜结果, 成功则进行提示, 失败显示错误位置的标记
+    * */
+    check() {
+        //  从界面获取需要检查的数据
+        const data = [];
+        $rows = this._$container.children();
+        $rows.map( (rowIndex, div) => $(div).children() );
+
+        const checker = new Checker(data)
+    }
+
+    /*
+    *   重置当前迷盘到初始状态
+    * */
+    reset() {
+
+    }
+
+    /*
+    *   清理错误标记
+    * */
+    clear() {
+
+    }
+
+    /*
+    *   重建新的迷盘, 开始新的一局
+    * */
+    rebuild() {
+        this._$container.empty();
+        this.build();
+        this.layout();
+    }
 
     bindPopup(popupNumbers) {
         this._$container.on("click", "span", e => {
