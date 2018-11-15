@@ -60,7 +60,23 @@ class Grid {
             .toArray()
             .map($data => $data.toArray());
 
-        const checker = new Checker(data)
+        const checker = new Checker(data);
+        if ( checker.check() ) {
+            return true;
+        }
+        //  检查不成功, 进行标记
+        const marks = checker.matrixMarks;
+        this._$container.children()
+            .each((rowIndex, div) => {
+                $(div).children().each((colIndex, span) => {
+                    const $span = $(span);
+                    if ( $span.is(".fixed") || marks[rowIndex][colIndex] ) {
+                        $span.removeClass("error")
+                    } else {
+                        $span.addClass("error");
+                    }
+                });
+            });
     }
 
     /*
