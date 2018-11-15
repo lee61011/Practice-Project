@@ -52,9 +52,13 @@ class Grid {
     * */
     check() {
         //  从界面获取需要检查的数据
-        const data = [];
-        $rows = this._$container.children();
-        $rows.map( (rowIndex, div) => $(div).children() );
+        const data = this._$container.children()
+            .map((rowIndex, div) => {
+                return $(div).children()
+                    .map((colIndex, span) => parseInt($(span).text()) || 0)
+            })
+            .toArray()
+            .map($data => $data.toArray());
 
         const checker = new Checker(data)
     }
