@@ -83,7 +83,10 @@ class Grid {
     *   重置当前迷盘到初始状态
     * */
     reset() {
-
+        this._$container.find("span:not(.fixed)")
+            .removeClass("error mark1 mark2")
+            .addClass("empty")
+            .text(0);
     }
 
     /*
