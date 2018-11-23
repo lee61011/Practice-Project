@@ -93,7 +93,8 @@ class Grid {
     *   清理错误标记
     * */
     clear() {
-
+        this._$container.find('span.error')
+            .removeClass("error");
     }
 
     /*
@@ -108,6 +109,9 @@ class Grid {
     bindPopup(popupNumbers) {
         this._$container.on("click", "span", e => {
             const $cell = $(e.target);
+            if ($cell.is(".fixed")) {
+                return;
+            }
             popupNumbers.popup($cell);
         });
     }
