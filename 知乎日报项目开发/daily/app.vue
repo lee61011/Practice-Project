@@ -16,6 +16,21 @@
         </div>
         <div class="daily-list">
             <!-- <Item></Item> -->
+            <template v-if="type === 'recommend'">
+                <div v-for="list in recommendList">
+                    <div class="daily-date">{{ formatDay(list.date) }}</div>
+                    <Item
+                            v-for="item in list.stories"
+                            :data="item"
+                            :key="item.id"></Item>
+                </div>
+            </template>
+            <template v-if="type === 'daily'">
+                <Item
+                        v-for="item in list"
+                        :data="item"
+                        :key="item.id"></Item>
+                <template>
         </div>
         <!-- <daily-article></daily-article> -->
     </div>
@@ -24,7 +39,9 @@
 <script>
     import $ from './libs/util';
     import axios from 'axios';
+    import Item from './components/item.vue';
     export default {
+        components: { Item },
         data () {
             return {
                 themes: [],
@@ -72,6 +89,14 @@
                     this.recommendList.push(res);
                     this.isLoading = false;
                 })
+            },
+            //	转换为带汉子的日月
+            formatDay (date) {
+                let month = date.substr(4, 2);
+                let day = date.substr(6, 2);
+                if (month.substr(0, 1) === '0') month = month.substr(1, 1);
+                if (day.substr(0, 1) === '0') day = day.substr(1, 1);
+                return `${month} 月 ${day} 日`;
             }
         },
         mounted () {
