@@ -121,3 +121,24 @@ html, body {
     text-align: center;
     margin: 10px 0;
 }
+
+.daily-article {
+    margin-left: 450px;
+    padding: 20px;
+}
+.daily-article-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #222;
+    padding: 10px 0;
+}
+.view-more a {
+    display: block;
+    cursor: pointer;
+    background: #f5f7f8;
+    text-align: center;
+    color: indianred;
+    text-decoration: none;
+    padding: 4px 0;
+    border-radius: 3px;
+}

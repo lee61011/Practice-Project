@@ -17,7 +17,6 @@
         <div class="daily-list" 
                 ref="list"
                 @scroll="handleScroll">
-            <!-- <Item></Item> -->
             <template v-if="type === 'recommend'">
                 <div v-for="list in recommendList">
                     <div class="daily-date">{{ formatDay(list.date) }}</div>
@@ -32,9 +31,10 @@
                         v-for="item in list"
                         :data="item"
                         :key="item.id"></Item>
-                <template>
+            </template>
         </div>
-        <!-- <daily-article></daily-article> -->
+        <Item @click.native="handleClick(item.id)"></Item>
+        <daily-article :id="articleId"></daily-article>
     </div>
 </template>
 
@@ -42,8 +42,9 @@
     import $ from './libs/util';
     import axios from 'axios';
     import Item from './components/item.vue';
+    import dailyArticle from './components/daily-article.vue'
     export default {
-        components: { Item },
+        components: { Item, dailyArticle },
         data () {
             return {
                 themes: [],
@@ -53,13 +54,12 @@
                 themeId: 0,
                 recommendList: [],
                 dailyTime: $.getTodayTime(),
-                isLoading: false
+                isLoading: false,
+                articleId: 0
             }
         },
         methods: {
             getThemes () {
-                console.log('准备发请求')
-
                 $.ajax.get('themes').then(res => {
                     //  cosnole.log('themes axios 发起get请求');
                     console.log(res)
@@ -116,6 +116,9 @@
                     this.dailyTime -= 86400000;
                     this.getRecommendList();
                 }
+            },
+            handleClick (id) {
+                this.articleId = id;
             }
         },
         mounted () {
