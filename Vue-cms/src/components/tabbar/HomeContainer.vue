@@ -1,20 +1,52 @@
 <template>
   <div>
     <!-- 轮播图 -->
-    <!-- {{ this.lunboList }} -->
     <mt-swipe :auto="4000">
       <!-- 在组件中使用 v-for 一定要绑定一个 key -->
       <mt-swipe-item v-for="(item, index) in lunboList" :key="index">
         <img :src="item.imgPath" alt="">
       </mt-swipe-item>
-      <!-- <mt-swipe-item>
-          <img src="../../images/lunbo1.jpg" alt="">
-      </mt-swipe-item>
-      <mt-swipe-item>222</mt-swipe-item>
-      <mt-swipe-item>333</mt-swipe-item>-->
     </mt-swipe>
 
-    
+    <!-- 九宫格 -->
+    <ul class="mui-table-view mui-grid-view mui-grid-9">
+      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+        <a href="#">
+          <img src="../../images/menu1.png" alt="">
+          <div class="mui-media-body">新闻资讯</div>
+        </a>
+      </li>
+      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+        <a href="#">
+          <img src="../../images/menu2.png" alt="">
+          <div class="mui-media-body">图片分享</div>
+        </a>
+      </li>
+      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+        <a href="#">
+          <img src="../../images/menu3.png" alt="">
+          <div class="mui-media-body">商品购买</div>
+        </a>
+      </li>
+      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+        <a href="#">
+          <img src="../../images/menu4.png" alt="">
+          <div class="mui-media-body">留言反馈</div>
+        </a>
+      </li>
+      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+        <a href="#">
+          <img src="../../images/menu5.png" alt="">
+          <div class="mui-media-body">视频专区</div>
+        </a>
+      </li>
+      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+        <a href="#">
+          <img src="../../images/menu6.png" alt="">
+          <div class="mui-media-body">联系我们</div>
+        </a>
+      </li>
+    </ul>
   </div>
 </template>
 
