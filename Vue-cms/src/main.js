@@ -27,7 +27,7 @@ Vue.use(MintUI)
 import 'mint-ui/lib/style.css'
 
 
-// 1.3 导入自己的 router.js 路由模块
+// 1.3 导入 router.js 路由模块
 import router from './router.js'
 
 
@@ -37,4 +37,5 @@ import app from './App.vue'
 var vm = new Vue({
   el: '#app',
   render: c => c(app),
+  router
 })
