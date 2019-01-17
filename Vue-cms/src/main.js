@@ -5,6 +5,14 @@ import VueRouter from 'vue-router'
 // 1.2 安装路由
 Vue.use(VueRouter)
 
+//  导入格式化时间的插件
+import moment from 'moment'
+//  定义一个全局的时间格式化过滤器
+Vue.filter('dateFormat', function (dateStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
+  return moment(dateStr).format(pattern)
+})
+
+
 // 注册 vuex
 import Vuex from 'vuex'
 Vue.use(Vuex)
