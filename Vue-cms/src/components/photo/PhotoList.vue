@@ -17,19 +17,27 @@
 </template>
 
 <script>
+import axios from 'axios'
 import mui from '../../lib/mui/js/mui.js'
 //  可以使用 "transform-remove-strict-mode" 这个插件来解决 webpack 打包中使用严格模式的问题
 
 export default {
     data() {
         return {
-            cates: [{"title": "滑动条0", "id": 0},
-            {"title": "滑动条1", "id": 1},
-            {"title": "滑动条2", "id": 2},
-            {"title": "滑动条3", "id": 3},
-            {"title": "滑动条4", "id": 4},
-            {"title": "滑动条5", "id": 5},
-            {"title": "滑动条6", "id": 6},]
+            cates: []
+        }
+    },
+    created() {
+        this.getAllCategory();
+    },
+    methods: {
+        getAllCategory(){
+            //  获取所有的图片类表分类
+            axios.get('https://www.easy-mock.com/mock/5c3eeb373093412ec11e4598/Vue-cms/getAllCategory').then( (res) => {
+                //  console.log(res)
+                res.data.unshift({"title": "全部", "id": 0});
+                this.cates = res.data
+            })
         }
     },
     mounted() {
