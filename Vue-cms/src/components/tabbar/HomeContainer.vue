@@ -1,12 +1,7 @@
 <template>
   <div>
     <!-- 轮播图 -->
-    <mt-swipe :auto="4000">
-      <!-- 在组件中使用 v-for 一定要绑定一个 key -->
-      <mt-swipe-item v-for="(item, index) in lunboList" :key="index">
-        <img :src="item.imgPath" alt="">
-      </mt-swipe-item>
-    </mt-swipe>
+    <swiper :lunboList="lunboList"></swiper>
 
     <!-- 九宫格 -->
     <ul class="mui-table-view mui-grid-view mui-grid-9">
@@ -53,6 +48,7 @@
 <script>
 import axios from "axios";
 import { Toast } from "mint-ui";
+import swiper from '../subcomponents/swiper.vue'
 
 export default {
   data() {
@@ -74,32 +70,14 @@ export default {
           }
         });
     }
+  },
+  components: {
+    swiper
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.mint-swipe {
-  height: 200px;
-
-  .mint-swipe-item {
-    &:nth-child(1) {
-      background-color: red;
-    }
-    &:nth-child(2) {
-      background-color: yellow;
-    }
-    &:nth-child(3) {
-      background-color: blue;
-    }
-
-    img {
-      width: 100%;
-      height: 100%;
-    }
-  }
-}
-
 .mui-grid-view.mui-grid-9 {
   background-color: #fff;
   border: 0;
