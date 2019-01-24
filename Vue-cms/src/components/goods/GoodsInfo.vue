@@ -23,11 +23,10 @@
 				<div class="mui-card-content">
 					<div class="mui-card-content-inner">
 						<p class="price">市场价：<del>￥ {{ goodsinfo.mallPrice }}</del>&nbsp;&nbsp;销售价：<span class="now_price">￥ {{ goodsinfo.price }}</span></p>
-                        <p>购买数量：<numbox></numbox></p>
+                        <p>购买数量：<numbox @getcount="getSelectedCount" :max="goodsStock"></numbox></p>
                         <p>
                             <mt-button type="primary" size="small">立即购买</mt-button>
                             <mt-button type="danger" size="small" @click="addToShopCar">加入购物车</mt-button>
-                            
                         </p>
 					</div>
 				</div>
@@ -63,7 +62,9 @@ export default {
             id: this.$route.params.id,
             lunbotu: [],
             goodsinfo: {},
-            bollFlag: false     //  控制加入购物车小球的显示与隐藏, 默认隐藏状态
+            bollFlag: false,     //  控制加入购物车小球的显示与隐藏, 默认隐藏状态
+            selectedCount: 1,    //  保存用户选中的商品的数量, 默认为 1
+            goodsStock: 60,      //  数据中没有库存信息, 这里手动设置一个值
         }
     },
     created() {
@@ -108,12 +109,16 @@ export default {
             const yDist = badgePosition.top - bollPosition.top;
 
             el.style.transform = `translate(${xDist}px, ${yDist}px)`;
-            el.style.transition = "all 1s ease"
+            el.style.transition = "all .8s ease"
             done();
         },
         afterEnter (el) {
             this.bollFlag = !this.bollFlag;
         },
+        getSelectedCount (count) {
+            //  子组件向父组件传值
+            this.selectedCount = count;
+        }
     },
     components: {
         swiper,
