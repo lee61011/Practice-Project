@@ -91,6 +91,17 @@ export default {
         },
         addToShopCar() {
             this.bollFlag = !this.bollFlag;
+
+            //  首先拼接出一个要购买商品的信息 准备保存在 stact 中
+            const goodsinfo = {
+                id: this.id,
+                count: this.selectedCount,
+                price: this.goodsinfo.price,
+                selected: true
+            }
+
+            //  调用 store 中的 mutations 来将商品加入到购物车
+            this.$store.commit("addToCar", goodsinfo);
         },
         beforeEnter (el) {
             el.style.transform = 'translate(0, 0)';

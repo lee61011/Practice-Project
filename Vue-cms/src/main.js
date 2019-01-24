@@ -16,6 +16,41 @@ Vue.filter('dateFormat', function (dateStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
 // 注册 vuex
 import Vuex from 'vuex'
 Vue.use(Vuex)
+var store = new Vuex.Store({
+  state: {
+    car: [
+      //  将购物车的每条数据设计成这样  { id: 商品ID count: 购买数量 price: 单价 selected: 是否选中 }
+    ]
+  },
+  mutations: {
+    addToCar (state, goodsinfo) {
+      //  点击加入购物车, 把商品信息保存在 state 的 car 中
+      //  如果购物车中已经存在对应商品, 值更新数量就可以了
+      //  如果购物车中没有对应的商品, 则将 信息 push 到 car 中
+      let flag = false;
+      state.car.some( item => {
+        if (item.id == goodsinfo.id) {
+          item.count += parseInt(goodsinfo.count);
+          flag = true;
+          return true
+        }
+      })
+
+      if (!flag) {
+        state.car.push(goodsinfo)
+      }
+    }
+  },
+  getters: {
+    getAllCount(state){
+      var c = 0;
+      state.car.forEach( item => {
+        c += item.count;
+      })
+      return c
+    }
+  }
+})
 
 // 导入 MUI 的样式
 import './lib/mui/css/mui.min.css'
@@ -45,5 +80,6 @@ import app from './App.vue'
 var vm = new Vue({
   el: '#app',
   render: c => c(app),
-  router
+  router,
+  store
 })
