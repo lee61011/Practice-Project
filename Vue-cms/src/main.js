@@ -16,11 +16,16 @@ Vue.filter('dateFormat', function (dateStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
 // 注册 vuex
 import Vuex from 'vuex'
 Vue.use(Vuex)
+
+//  每次首先进入网站, 先从 本地的 localstorage 中将购物车信息读取出来, 存放在 store 中
+var car = JSON.parse(localStorage.getItem('car') || '[]')
+
 var store = new Vuex.Store({
   state: {
-    car: [
+    /* car: [
       //  将购物车的每条数据设计成这样  { id: 商品ID count: 购买数量 price: 单价 selected: 是否选中 }
-    ]
+    ] */
+    car: car
   },
   mutations: {
     addToCar (state, goodsinfo) {
@@ -39,6 +44,9 @@ var store = new Vuex.Store({
       if (!flag) {
         state.car.push(goodsinfo)
       }
+
+      //  当更新 car 之后, 将 car 数组存储到本地的 localStorage 中
+      localStorage.setItem('car', JSON.stringify(state.car))
     }
   },
   getters: {
