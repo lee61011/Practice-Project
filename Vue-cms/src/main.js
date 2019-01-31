@@ -47,7 +47,28 @@ var store = new Vuex.Store({
 
       //  当更新 car 之后, 将 car 数组存储到本地的 localStorage 中
       localStorage.setItem('car', JSON.stringify(state.car))
-    }
+    },
+    //  更新购物车中商品信息的方法
+    updateGoodsInfo(state, goodsinfo) {
+      state.car.some(item => {
+        if (item.id == goodsinfo.id) {
+          item.count = parseInt(goodsinfo.count);
+          return true;
+        }
+      })
+      //  当修改完商品的数量后， 把最新的购物车数据保存在本地的 localstore 中
+      localStorage.setItem('car', JSON.stringify(state.car))
+    },
+    //  根据 ID 删除 store 中的购物车商品信息
+    removeFromCar(state, id) {
+      state.car.some((item, i) => {
+        if (item.id == id) {
+          state.car.splice(i, 1);
+          return true;
+        }
+      })
+      localStorage.setItem('car', JSON.stringify(state.car))
+    }  
   },
   getters: {
     getAllCount(state){

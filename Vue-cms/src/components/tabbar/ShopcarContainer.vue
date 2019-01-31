@@ -13,8 +13,8 @@
                             <h1>{{ item.id }}</h1>
                             <p>
                                 <span class="price">¥ {{ item.price }}</span>
-                                <numbox :initCount="$store.getters.getGoodsCount[item.id]"></numbox>
-                                <a href="#">删除</a>
+                                <numbox :initCount="$store.getters.getGoodsCount[item.id]" :goodsid="item.id"></numbox>
+                                <a href="#" @click.prevent="remove(item.id, index)">删除</a>
                             </p>
                         </div>
 
@@ -52,6 +52,11 @@ export default {
         getGoodsList() {
             //  加载页面之后请求接口获取购物车商品类表, 这是使用 本地 localstorage 数据来模拟
             this.goodsList = JSON.parse(localStorage.getItem('car') || '[]');
+        },
+        remove(id, index) {
+            //  删除商品信息
+            this.goodsList.splice(index, 1);
+            this.$store.commit('removeFromCar', id)
         }
     },
     components: {
