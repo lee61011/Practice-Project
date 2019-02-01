@@ -7,7 +7,9 @@
             <div class="mui-card" v-for="(item, index) in goodsList" :key="index">
 				<div class="mui-card-content">
 					<div class="mui-card-content-inner">
-                        <mt-switch></mt-switch>
+                        <mt-switch 
+                            v-model="$store.getters.getGoodsSelected[item.id]"
+                            @change="selectedChanged(item.id, $store.getters.getGoodsSelected[item.id])"></mt-switch>
                         <img src="http://plgg6kn0l.bkt.clouddn.com/vue-cms/getLunbo/lunbo1.jpg" alt="">
                         <div class="info">
                             <h1>{{ item.id }}</h1>
@@ -27,12 +29,15 @@
 
         <div class="mui-card">
 				<div class="mui-card-content">
-					<div class="mui-card-content-inner">
-						这是一个最简单的卡片视图控件；卡片视图常用来显示完整独立的一段信息，比如一篇文章的预览图、作者信息、点赞数量等
+					<div class="mui-card-content-inner jiesuan">
+						<div class="left">
+                            <p>总计 (不含运费)</p>
+                            <p>已勾选商品 <span class="red">0</span> 件， 总价 <span class="red">￥0</span></p>
+                        </div>
+                        <mt-button type="danger">去结算</mt-button>
 					</div>
 				</div>
 			</div>
-
     </div>
 </template>
 
@@ -57,6 +62,11 @@ export default {
             //  删除商品信息
             this.goodsList.splice(index, 1);
             this.$store.commit('removeFromCar', id)
+        },
+        selectedChanged(id, val) {
+            //  当点击选择开关， 将开关状态同步到 store 中
+            console.log("触发了开关")
+            //  this.$store.commit("updateGoodsSelected", {id, selected: val})
         }
     },
     components: {
@@ -98,6 +108,18 @@ export default {
             }
         }
 
+    }
+
+    .jiesuan {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .red {
+            color: red;
+            font-weight: bold;
+            font-size: 16px;    
+        }
     }
 }
 

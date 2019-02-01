@@ -21,9 +21,7 @@ export default {
         // console.log(this.$refs.numbox.value);
         //console.log(this.$refs.numbox.value)
         //  this.$emit("getcount", parseInt(this.$refs.numbox.value));
-        this.$store.commit("updateGoodsInfo", {id: this.goodsid, count: this.$refs.numbox.value}) {
-
-        }
+        this.$store.commit("updateGoodsInfo", {id: this.goodsid, count: this.$refs.numbox.value})
       }
     },
     props: ["initCount", "goodsid"]
