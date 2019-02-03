@@ -100,6 +100,19 @@ var store = new Vuex.Store({
       })
       return o;
     },
+    getGoodsCountAndAmount(state) {
+      var o = {
+        count = 0,    //  勾选数量
+        amount = 0    //  勾选总价
+      };
+      state.car.forEach(item => {
+        if (item.selected) {
+          o.count += item.count;
+          o.amount += item.price * item.count
+        }
+      });
+      return o;
+    }
   }
 })
 
