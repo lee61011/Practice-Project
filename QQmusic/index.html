@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- DEV -->
+    <!-- <link rel="stylesheet/less" href="css/index.less">
+    <script src="js/less.js"></script> -->
+
+    <link rel="stylesheet" href="css/index.css">
+
+    <!-- REM -->
+    <script>
+        ~function(){
+            let computed = () => {
+                let winW = document.documentElement.clientWidth;
+                let value = winW < 640 ? winW / 640 * 100: 100;
+                document.documentElement.style.fontSize = value + 'px';
+            };
+            computed();
+            window.addEventListener('resize', computed);
+        }();
+    </script>
+</head>
+<body style="clear: both">
+    <section class="container">
+        <img src="img/myDream.jpg" alt="" class="bg">
+        <div class="bgMark"></div>
+        <!-- header -->
+        <header class="headerBox">
+            <img src="img/myDream.jpg" alt="">
+            <h1>我的梦</h1>
+            <h2>张靓颖</h2>
+            <a href="javascript:;" class="run"></a>
+        </header>
+
+        <!-- main -->
+        <main class="mainBox">
+            <div class="wrapper" data-y="0">
+                <!-- <p>一直的一直的往前走</p> -->
+            </div>
+        </main>
+
+        <!-- footer -->
+        <footer class="footerBox">
+            <div class="progress">
+                <span class="already">00:00</span>
+                <div class="pro">
+                    <div class="run"></div>
+                </div>
+                <span class="duration">00:00</span>
+            </div>
+            <a href="javascript:;" class="down">下载这首歌</a>
+        </footer>
+
+        <!-- AUDIO -->
+        <audio src="img/bgmusic.mp3" preload="none" id="audioBox"></audio>
+    </section>
+
+    <script src="js/zepto.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

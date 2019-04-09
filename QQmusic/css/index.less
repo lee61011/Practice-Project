@@ -1,0 +1,183 @@
+@import "reset.min.less";
+@import (reference) "common.less";   //  reference 值引用不编译
+
+html {
+    font-size: 100px;   /* 640px: 1REM = 100px */
+}
+
+html, body {
+    .fullPage;
+    //  background: #f4f4f4;
+}
+
+.container {
+    .fullPage;
+    position: relative;
+
+    .bg {
+        display: block;
+        .fullPage;
+        width: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -2;
+        -webkit-filter: blur(3px);
+        filter: blur(5px);
+    }
+
+    .bgMark {
+        .fullPage;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        background: rgba(0, 0, 0, .4)
+    }
+}
+
+/* HEADER */
+.headerBox {
+    height: 1.2rem;
+    padding: .3rem;
+    position: relative;
+    background: rgba(0, 0, 0, 0.2);
+
+    img {
+        position: absolute;
+        width: 1.2rem;
+        height: 1.2rem;
+        left: .3rem;
+        top: .3rem;
+    }
+
+    h1, h2 {
+        padding-left: 1.5rem;
+        line-height: .6rem;
+        color: #fff;
+        font-size: .36rem
+    }
+    h2 {
+        font-size: .32rem;
+        font-weight: normal;
+    }
+
+    a {
+        display: none;
+        position: absolute;
+        right: .3rem;
+        top: 50%;
+        margin-top: unit(-.6/2, rem);
+        width: .6rem;
+        height: .6rem;
+        background: url('../img/music.svg') no-repeat;
+        background-size: 100% 100%;
+
+        &.run {
+            .animation(@name: musicMove, @count: infinite);
+        }
+    }
+}
+
+@keyframes musicMove {
+    0% {
+        .transformRotate(0);
+    }
+    100% {
+        .transformRotate(360);
+    }
+}
+
+/* MAIN */
+.mainBox {
+    position: relative;
+    //  height: auto;   //  高度需要在 JS 中通过计算获得
+    margin: .4rem .2rem;
+    overflow: hidden;
+
+    .wrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        //  需要在 JS 中控制 wrapper 在 main 区域中上下动，以此实现歌词的展示
+        .transition(@duration: .3s);
+
+        p {
+            line-height: .84rem;
+            text-align: center;
+            color: rgba(255, 255, 255, .5);
+            font-size: .32rem;
+            letter-spacing: .04rem;
+            .substringText;
+
+            &.select {
+                color: #31c27c;
+                .transition(@duration: .3s);    //  颜色变化的过渡效果
+            }
+        }
+    }
+}
+
+/* FOOTER */
+.footerBox {
+    position: relative;
+    margin: .2rem;
+    height: 2.2rem;
+
+    .down {
+        display: block;
+        margin: 0 auto;
+        width: 4.4rem;
+        height: .9rem;
+        line-height: .9rem;
+        text-align: center;
+        color: #fff;
+        font-size: .36rem;
+        border-radius: .45rem;
+
+        background: url("../img/QQ_music.png") no-repeat .2rem @green;
+        background-size: .7rem .7rem;
+
+        &:active {
+            background-color: darken(@green, 20%);  //  在原有的颜色上加深
+        }
+    }
+
+    .progress {
+        height: .8rem;
+        line-height: .8rem;
+        font-size: 0;
+
+        span, div {
+            display: inline-block;
+        }
+
+        span {
+            width: .9rem;
+            height: 100%;
+            color: rgba(255, 255, 255, .5);
+            font-size: .24rem;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .pro {
+            position: relative;
+            width: 4.2rem;
+            height: .04rem;
+            background: @gray;
+            vertical-align: middle;
+
+            .run {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 0;
+                height: 100%;
+                background: @green;
+                .transition(@duration: .3s);
+            }
+        }
+    }
+}
