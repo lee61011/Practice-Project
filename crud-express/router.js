@@ -12,7 +12,7 @@ router.get('/students', function(req, res){
         if (err) {
             return res.status(500).send('Server error...') 
         }
-        
+
         res.render('index.html', {
             fruits: ['香蕉', '橘子', '苹果'],
             students: students
@@ -28,7 +28,13 @@ router.post('/students/new', function (req, res) {
     //  1. 获取表单数据
     //  2. 处理 (将数据保存到 db.json 文件中)
     //  3. 发送响应
-    console.log(req.body)
+    Student.save(req.body, function (err) {
+        if (err) {
+            return res.status(500).send('Server error ...')
+        }
+
+        res.redirect('/students')
+    })
 })
 
 router.get('/students/edit', function (req, res) {

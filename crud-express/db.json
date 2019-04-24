@@ -1,7 +1,1 @@
-{
-    "students": [
-        {"id": 1, "name": "张三", "gender": 0, "age": 18, "hobbies": "吃饭，睡觉，打豆豆..."},
-        {"id": 2, "name": "张三", "gender": 0, "age": 18, "hobbies": "吃饭，睡觉，打豆豆..."},
-        {"id": 3, "name": "李四11", "gender": 0, "age": 18, "hobbies": "吃饭，睡觉，打豆豆..."}
-    ]
-}
+{"students":[{"id":1,"name":"张三","gender":0,"age":18,"hobbies":"吃饭，睡觉，打豆豆..."},{"id":2,"name":"张三","gender":0,"age":18,"hobbies":"吃饭，睡觉，打豆豆..."},{"id":3,"name":"李四11","gender":0,"age":18,"hobbies":"吃饭，睡觉，打豆豆..."},{"name":"小红","gender":"1","age":"23","hobbies":"唱歌","id":4}]}
