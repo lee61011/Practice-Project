@@ -1,18 +1,18 @@
 const fs = require('fs')
 const express = require('express')
+const Student = require('./student')
 
 //  1. 创建一个路由容器
 const router = express.Router()
 
 //  2. 把路由都挂载到 router 路由容器中
 router.get('/students', function(req, res){
-    fs.readFile('./db.json', 'utf-8', function (err, data) {
+    
+    Student.find(function (err, students) {
         if (err) {
-            return res.status(500).send('Server error...')
+            return res.status(500).send('Server error...') 
         }
-
-        //  从文件中读取数据
-        var students = JSON.parse(data).students
+        
         res.render('index.html', {
             fruits: ['香蕉', '橘子', '苹果'],
             students: students
