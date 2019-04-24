@@ -72,55 +72,40 @@
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h1 class="page-header">Dashboard</h1>
+                <h2 class="sub-header">添加学生</h2>
 
-                <div class="row placeholders">
-                    
-                    {{ each fruits }}
-                        <div class="col-xs-6 col-sm-3 placeholder">
-                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
-                                height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-                            <h4>{{ $value }}</h4>
-                            <span class="text-muted">Something else</span>
+                <!-- 添加学生表单 -->
+                <form actions="/students/new" method="post">
+                    <div class="form-group">
+                        <label for="">姓名</label>
+                        <input type="text" name="name" class="form-control" value="{{ student.name }}" id="" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="">性别</label>
+                        <div>
+                            <label class="radio-inline">
+                                <input type="radio" name="gender" value="0"> 男
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="gender" value="1"> 女
+                            </label>
                         </div>
-                    {{ /each }}
-                </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">年龄</label>
+                        <input type="number" class="form-control" value="{{ student.age }}" id="" name="age">
+                    </div>
+                    <div class="form-group">
+                        <label for="">爱好</label>
+                        <input type="text" class="form-control" id="" value="{{ student.hobbies }}" name="hobbies">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
 
-                <h2 class="sub-header">Section title</h2>
-                <a class="btn btn-success" href="/students/new">添加学生</a>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>姓名</th>
-                                <th>性别</th>
-                                <th>年龄</th>
-                                <th>爱好</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{ each students }}
-                                <tr>
-                                    <td>{{ $value.id }}</td>
-                                    <td>{{ $value.name }}</td>
-                                    <td>{{ $value.gender }}</td>
-                                    <td>{{ $value.age }}</td>
-                                    <td>{{ $value.hobbies }}</td>
-                                    <td>
-                                        <a href="/students/edit?id={{ $value.id }}">编辑</a>
-                                        <a href="/students/delete?id={{ $value.id }}">删除</a>
-                                    </td>
-                                </tr>
-                            {{ /each }}
-                        </tbody>
-                    </table>
-                </div>
+
             </div>
         </div>
     </div>
-
 
 </body>
 

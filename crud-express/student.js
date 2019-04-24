@@ -20,6 +20,22 @@ exports.find = function (callback) {
     })
 }
 
+/* 
+    根据 id 获取学生信息对象
+*/
+exports.findById = function (id, callback) {
+    fs.readFile(dbPath, 'utf-8', function (err, data) {
+        if (err) {
+            return callback(err)
+        }
+
+        var students = JSON.parse(data).students
+        var ret = students.find(function (item) {
+            return item.id === id
+        })
+        callback(null, ret)
+    })
+}
 
 
 /*
@@ -53,10 +69,34 @@ exports.save = function (student, callback) {
 /*
     更新学生
 */
-exports.update = function () {
+exports.updateById = function (student, callback) {
+    fs.readFile(dbPath, 'utf-8', function (err) {
+        if (err) {
+            return callback(err)
+        }
 
+        var students = JSON.parse(data).students
+        //  find 方法 满足条件 终止遍历
+        var stu = students.find(function(item){
+            return item.id === student.id
+        })
+        //  为 student 重新赋值
+        for (var key in student) {
+            stu[key] = student[key]
+        }
+
+        var fileData = JSON.stringify({
+            students: students
+        })
+        fs.writeFile(dbPath, fileData, function (err) {
+            if (err) {
+                return callback(err)
+            }
+
+            callback(null)
+        })
+    })
 }
-
 
 /*
     删除学生

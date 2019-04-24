@@ -38,7 +38,23 @@ router.post('/students/new', function (req, res) {
 })
 
 router.get('/students/edit', function (req, res) {
+    //  在客户端列表页处理链接问题（需要有 id 参数）
+    //  获取要编辑学生的 id
+    //  渲染编辑页面
     
+    /* req.render('edit.html', {
+        student: 
+    }) */
+    Student.findById(parseInt(req.query.id), function (err, student) {
+        if (err) {
+            return res.status(500).send('Server Error ... ')
+        }
+
+        //  console.log(student)
+        res.render('edit.html', {
+            student: student
+        })
+    })
 })
 
 router.post('/students/edit', function (req, res) {
