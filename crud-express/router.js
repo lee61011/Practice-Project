@@ -58,7 +58,16 @@ router.get('/students/edit', function (req, res) {
 })
 
 router.post('/students/edit', function (req, res) {
-    
+    //  获取表单数据    req.body
+    //  更新数据        Student.updateById()
+    //  发送响应        
+    Student.updateById(req.body, function (err) {
+        if (err) {
+            return res.status(500).send('Server Error ... ')
+        }
+
+        res.redirect('/students')
+    })
 })
 
 router.get('/students/delete', function (req, res) {
