@@ -37,7 +37,6 @@ exports.findById = function (id, callback) {
     })
 }
 
-
 /*
     添加保存学生
 */
@@ -49,8 +48,15 @@ exports.save = function (student, callback) {
 
         //  先把文件中读取到的数据转换成字符串，再将学生信息 push 进去，最后再通过 fs.write 将数据写入文件
         var students = JSON.parse(data).students
-        //  处理 id
-        student.id = students[students.length - 1].id + 1
+        //  处理 id (判断如果列表为空的时候 id 为 1)
+        /* if ( students.length === 0 ) {
+            student.id = 1
+        } else {
+            student.id = students[students.length - 1].id + 1
+        } */
+        student.id = students.length === 0 ? 1 : students[students.length - 1].id + 1
+        
+
         students.push(student)
         var fileData = JSON.stringify({
             students: students
@@ -64,7 +70,6 @@ exports.save = function (student, callback) {
         })
     })
 }
-
 
 /*
     更新学生
@@ -102,6 +107,33 @@ exports.updateById = function (student, callback) {
 /*
     删除学生
 */
-exports.delete = function () {
+exports.deleteById = function (id, callback) {
+    fs.readFile(dbPath, 'utf-8', function (err, data) {
+        if (err) {
+            return callback(err)
+        }
 
+        //  先把文件中读取到的数据转换成字符串，再将学生信息 push 进去，最后再通过 fs.write 将数据写入文件
+        var students = JSON.parse(data).students
+
+        //  findIndex 
+        var deleteId = students.findIndex(function (item) {
+            return item.id === parseInt(id)            
+        })
+        
+        //  删除对应的学生对象
+        students.splice(deleteId, 1)
+
+        //  重写数据
+        var fileData = JSON.stringify({
+            students: students
+        })
+        fs.writeFile(dbPath, fileData, function (err) {
+            if (err) {
+                return callback(err)
+            }
+
+            callback(null)
+        })
+    })
 }
