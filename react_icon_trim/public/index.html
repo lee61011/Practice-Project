@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <title>React 图片裁切</title>
+  </head>
+  <body>
+    <!-- COMPUTED REM -->
+    <script>
+      ~ function () {
+        //  orientationchange: 设备横屏检测
+        let event = 'orientationchange' in window ? 'orientationchange' : 'resize';
+        let computed = () => {
+          let HTML = document.documentElement,
+          deviceW = HTML.clientWidth,
+          designW = 750,
+          ratio = deviceW / designW * 100;
+          if (deviceW >= designW) ratio = 100;
+          HTML.style.fontSize = ratio + 'px';
+          window.ratio = ratio;
+        }
+
+        computed();
+        window.addEventListener(event, computed);
+      }();
+    </script>
+    
+    <div id="root"></div>
+  </body>
+</html>

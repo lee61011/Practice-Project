@@ -1,0 +1,42 @@
+html {
+  font-size: 100px;
+}
+
+html, body, #root {
+  height: 100%;
+  background: #E4E4E4;
+}
+
+canvas {
+  display: block;
+}
+
+.mainBox {
+  margin: 0 auto;
+  max-width: 750px;
+  min-height: 100%;
+  background: #fff;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
