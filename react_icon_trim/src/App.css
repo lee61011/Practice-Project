@@ -4,6 +4,7 @@ html {
 
 html, body, #root {
   height: 100%;
+  margin: 0;
   background: #E4E4E4;
 }
 
@@ -18,25 +19,71 @@ canvas {
   background: #fff;
 }
 
-.App {
-  text-align: center;
+.mainBox .baseInfo {
+  width: 100%;
+  height: 2rem;
+  padding: 10px;
+  font-size: .2rem;
 }
 
-.App-logo {
-  height: 40vmin;
+.mainBox .baseInfo .imgBox {
+  width: 2rem;
+  height: 2rem;
+  float: left;
+  margin-right: 10px;
+  background: #ccc;
+  overflow: hidden;
+}
+.mainBox .baseInfo .imgBox img {
+  width: 2rem;
+  height: 2rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.mainBox .baseInfo .desc {
+  line-height: .2rem;
 }
 
-.App-link {
-  color: #09d3ac;
+.mainBox .handleBox {
+  width: 100%;
+  font-size: .3rem;
+}
+.mainBox .handleBox .returnBtn {
+  height: .8rem;
+  line-height: .8rem;
+  padding-left: 10px;
+  background: rgb(156, 233, 243);
+}
+
+.mainBox .handleBox .clipImageBox {
+  position: relative;
+}
+.mainBox .handleBox .clipImageBox .canvasBoxDiv {
+  margin: .2rem;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.mainBox .handleBox .clipImageBox .canvasBoxDiv .mark {
+  position: absolute;
+  border: 1px dashed red;
+  filter: opacity(60%);
+  background: rgba(39, 24, 24, 0.603);
+}
+
+.mainBox .handleBox .buttonBox {
+  height: .6rem;
+  line-height: .6rem;
+  padding-left: 10px;
+}
+.mainBox .handleBox .buttonBox .file {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+.mainBox .handleBox .buttonBox button {
+  height: .6rem;
+  margin-right: 10px;
+  border: 0px solid transparent;
+  border-radius: .1rem;
+  outline: none;
+  background: rgb(156, 233, 243);
 }
