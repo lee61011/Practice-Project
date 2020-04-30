@@ -16,7 +16,7 @@
     "gulp-less": "^4.0.1",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-util": "^3.0.8",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "ts-loader": "^3.4.0",
     "typescript": "^2.6.2",
     "webpack": "^4.16.1",
